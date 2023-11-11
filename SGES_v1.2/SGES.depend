@@ -1,0 +1,360 @@
+# depslib dependency file v1.0
+1698086157 source:c:\users\aagot\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\main.cpp
+	<iostream>
+	<cstdlib>
+	"menuEmpleados.h"
+	"menuNafta.h"
+	"menuServicios.h"
+
+1698093678 c:\users\aagot\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\menuempleados.h
+	"EmpleadoClase.h"
+
+1698094827 c:\users\aagot\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\menunafta.h
+	"NaftaClase.h"
+
+1698086206 c:\users\aagot\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\menuservicios.h
+
+1698091533 c:\users\aagot\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\empleadoclase.h
+	<cstring>
+
+1698094576 c:\users\aagot\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\naftaclase.h
+	<cstring>
+
+1698101396 source:c:\users\lenovo\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\main.cpp
+	<iostream>
+	<cstdlib>
+	"menuEmpleados.h"
+	"menuCombustible.h"
+	"menuCargaCombustible.h"
+	"menuTipoServicios.h"
+	"menuVentaServicios.h"
+
+1698093678 c:\users\lenovo\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\menuempleados.h
+	"EmpleadoClase.h"
+
+1698100326 c:\users\lenovo\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\empleadoclase.h
+	<cstring>
+
+1698096909 c:\users\lenovo\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\menunafta.h
+	"NaftaClase.h"
+
+1698096909 c:\users\lenovo\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\naftaclase.h
+	<cstring>
+
+1698086206 c:\users\lenovo\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\menuservicios.h
+
+1698101167 c:\users\lenovo\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\menucargacombustible.h
+	"CargaCombustibleClase.h"
+
+1698100399 c:\users\lenovo\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\combustibleclase.h
+
+1698099508 c:\users\lenovo\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\menutiposervicios.h
+	"TipoServicioClase.h"
+
+1698099536 c:\users\lenovo\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\tiposervicioclase.h
+
+1698100164 c:\users\lenovo\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\menucombustible.h
+	"CombustibleClase.h"
+
+1698099367 c:\users\lenovo\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\cargacombustibleclase.h
+
+1698101167 c:\users\lenovo\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\menuventaservicios.h
+	"VentaServicioClase.h"
+
+1698101167 c:\users\lenovo\onedrive - frgp.utn.edu.ar\2 cuatrimestre\laboratorio 2\tp final\sges\ventaservicioclase.h
+	<cstring>
+
+1698114176 source:c:\users\nahue\onedrive\escritorio\sges_v0.2\sges\main.cpp
+	<iostream>
+	<cstdlib>
+	"menues/menuEmpleados.h"
+	"menues/menuCombustible.h"
+	"menues/menuCargaCombustible.h"
+	"menues/menuTipoServicios.h"
+	"menues/menuVentaServicios.h"
+	"funciones/funcionesGlobales.h"
+
+1698119402 c:\users\nahue\onedrive\escritorio\sges_v0.2\sges\menues\menuempleados.h
+	"../clases/EmpleadoClase.h"
+
+1698119238 c:\users\nahue\onedrive\escritorio\sges_v0.2\sges\clases\empleadoclase.h
+	<cstring>
+
+1698113600 c:\users\nahue\onedrive\escritorio\sges_v0.2\sges\menues\menucombustible.h
+	"../clases/CombustibleClase.h"
+
+1698100399 c:\users\nahue\onedrive\escritorio\sges_v0.2\sges\clases\combustibleclase.h
+
+1698113600 c:\users\nahue\onedrive\escritorio\sges_v0.2\sges\menues\menucargacombustible.h
+	"../clases/CargaCombustibleClase.h"
+
+1698099367 c:\users\nahue\onedrive\escritorio\sges_v0.2\sges\clases\cargacombustibleclase.h
+
+1698113600 c:\users\nahue\onedrive\escritorio\sges_v0.2\sges\menues\menutiposervicios.h
+	"../clases/TipoServicioClase.h"
+
+1698099536 c:\users\nahue\onedrive\escritorio\sges_v0.2\sges\clases\tiposervicioclase.h
+
+1698113600 c:\users\nahue\onedrive\escritorio\sges_v0.2\sges\menues\menuventaservicios.h
+	"../clases/VentaServicioClase.h"
+
+1698101167 c:\users\nahue\onedrive\escritorio\sges_v0.2\sges\clases\ventaservicioclase.h
+	<cstring>
+
+1698113992 c:\users\nahue\onedrive\escritorio\sges_v0.2\sges\funciones\funcionesglobales.h
+	"funcionesGlobales.cpp"
+
+1698114082 c:\users\nahue\onedrive\escritorio\sges_v0.2\sges\funciones\funcionesglobales.cpp
+	<windows.h>
+	"funcionesGlobales.h"
+
+1698261445 source:c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\main.cpp
+	<iostream>
+	<cstdlib>
+	"menues/menuEmpleados.h"
+	"menues/menuCombustible.h"
+	"menues/menuCargaCombustible.h"
+	"menues/menuTipoServicios.h"
+	"menues/menuVentaServicios.h"
+	"menues/menuStockList.h"
+	"menues/menuVentaKiosco.h"
+	"menues/menuPedidoInsumos.h"
+	"funciones/funcionesGlobales.h"
+
+1698119402 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\menues\menuempleados.h
+	"../clases/EmpleadoClase.h"
+
+1698119238 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\clases\empleadoclase.h
+	<cstring>
+
+1698113600 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\menues\menucombustible.h
+	"../clases/CombustibleClase.h"
+
+1698100399 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\clases\combustibleclase.h
+
+1698113600 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\menues\menucargacombustible.h
+	"../clases/CargaCombustibleClase.h"
+
+1698099367 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\clases\cargacombustibleclase.h
+
+1698113600 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\menues\menutiposervicios.h
+	"../clases/TipoServicioClase.h"
+
+1698099536 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\clases\tiposervicioclase.h
+
+1698113600 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\menues\menuventaservicios.h
+	"../clases/VentaServicioClase.h"
+
+1698101167 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\clases\ventaservicioclase.h
+	<cstring>
+
+1698259072 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\menues\menustocklist.h
+	"../clases/StockListClase.h"
+
+1698259210 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\clases\stocklistclase.h
+
+1698113992 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\funciones\funcionesglobales.h
+	"funcionesGlobales.cpp"
+
+1698114082 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\funciones\funcionesglobales.cpp
+	<windows.h>
+	"funcionesGlobales.h"
+
+1698260309 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\menues\menuventakiosco.h
+	"../clases/VentaKioscoClase.h"
+
+1698260284 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\clases\ventakioscoclase.h
+
+1698261412 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\menues\menupedidoinsumos.h
+	"../clases/PedidoInsumoClase.h"
+
+1698261346 c:\users\lenovo\downloads\sges_v0.3\sges_v0.3\sges\clases\pedidoinsumoclase.h
+
+1698274721 source:c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\main.cpp
+	<iostream>
+	<cstdlib>
+	"funciones/funcionesGlobales.h"
+	"menues/menuEmpleados.h"
+	"menues/menuCombustible.h"
+	"menues/menuCargaCombustible.h"
+	"menues/menuTipoServicios.h"
+	"menues/menuVentaServicios.h"
+	"menues/menuStockList.h"
+	"menues/menuVentaKiosco.h"
+	"menues/menuPedidoInsumos.h"
+
+1698274363 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\funciones\funcionesglobales.h
+	"funcionesGlobales.cpp"
+
+1698274490 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\funciones\funcionesglobales.cpp
+	<windows.h>
+	"funcionesGlobales.h"
+
+1698274703 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\menues\menuempleados.h
+	"../clases/EmpleadoClase.h"
+
+1698270311 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\clases\empleadoclase.h
+	<cstring>
+
+1698274460 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\menues\menucombustible.h
+	"../clases/CombustibleClase.h"
+
+1698635502 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\clases\combustibleclase.h
+
+1698634465 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\menues\menucargacombustible.h
+	"../clases/CargaCombustibleClase.h"
+
+1698635737 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\clases\cargacombustibleclase.h
+
+1698637412 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\menues\menutiposervicios.h
+	"../clases/TipoServicioClase.h"
+
+1698637450 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\clases\tiposervicioclase.h
+
+1698113600 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\menues\menuventaservicios.h
+	"../clases/VentaServicioClase.h"
+
+1698101167 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\clases\ventaservicioclase.h
+	<cstring>
+
+1698259072 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\menues\menustocklist.h
+	"../clases/StockListClase.h"
+
+1698259210 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\clases\stocklistclase.h
+
+1698260309 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\menues\menuventakiosco.h
+	"../clases/VentaKioscoClase.h"
+
+1698260284 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\clases\ventakioscoclase.h
+
+1698261412 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\menues\menupedidoinsumos.h
+	"../clases/PedidoInsumoClase.h"
+
+1698261346 c:\users\nahue\onedrive\escritorio\sges_v0.5\sges\clases\pedidoinsumoclase.h
+
+1698774795 source:c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\main.cpp
+	<iostream>
+	<cstdlib>
+	"funciones/funcionesGlobales.h"
+	"menues/menuEmpleados.h"
+	"menues/menuCombustible.h"
+	"menues/menuCargaCombustible.h"
+	"menues/menuTipoServicios.h"
+	"menues/menuVentaServicios.h"
+	"menues/menuStockList.h"
+	"menues/menuVentaKiosco.h"
+	"menues/menuClientes.h"
+
+1698274363 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\funciones\funcionesglobales.h
+	"funcionesGlobales.cpp"
+
+1698274490 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\funciones\funcionesglobales.cpp
+	<windows.h>
+	"funcionesGlobales.h"
+
+1698274703 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\menues\menuempleados.h
+	"../clases/EmpleadoClase.h"
+
+1698270311 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\clases\empleadoclase.h
+	<cstring>
+
+1698274460 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\menues\menucombustible.h
+	"../clases/CombustibleClase.h"
+
+1698635502 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\clases\combustibleclase.h
+
+1698634465 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\menues\menucargacombustible.h
+	"../clases/CargaCombustibleClase.h"
+
+1698635737 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\clases\cargacombustibleclase.h
+
+1698695346 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\menues\menutiposervicios.h
+	"../clases/TipoServicioClase.h"
+
+1698695137 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\clases\tiposervicioclase.h
+
+1698113600 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\menues\menuventaservicios.h
+	"../clases/VentaServicioClase.h"
+
+1698101167 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\clases\ventaservicioclase.h
+	<cstring>
+
+1698695814 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\menues\menustocklist.h
+	"../clases/StockListClase.h"
+
+1698697818 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\clases\stocklistclase.h
+
+1698698233 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\menues\menuventakiosco.h
+	"../clases/VentaKioscoClase.h"
+
+1698698186 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\clases\ventakioscoclase.h
+
+1698775035 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\menues\menuclientes.h
+	"../clases/ClienteClase.h"
+
+1698774816 c:\users\lenovo\downloads\sges_v0.7\sges_v0.7\sges\clases\clienteclase.h
+	<cstring>
+
+1698796313 source:c:\users\nahue\onedrive\escritorio\sges_v0.9\main.cpp
+	<iostream>
+	<cstdlib>
+	"funciones/funcionesGlobales.h"
+	"menues/menuEmpleados.h"
+	"menues/menuCombustible.h"
+	"menues/menuCargaCombustible.h"
+	"menues/menuTipoServicios.h"
+	"menues/menuVentaServicios.h"
+	"menues/menuStockList.h"
+	"menues/menuVentaKiosco.h"
+	"menues/menuClientes.h"
+
+1698274363 c:\users\nahue\onedrive\escritorio\sges_v0.9\funciones\funcionesglobales.h
+	"funcionesGlobales.cpp"
+
+1698274490 c:\users\nahue\onedrive\escritorio\sges_v0.9\funciones\funcionesglobales.cpp
+	<windows.h>
+	"funcionesGlobales.h"
+
+1698796611 c:\users\nahue\onedrive\escritorio\sges_v0.9\menues\menuempleados.h
+	"../clases/EmpleadoClase.h"
+
+1698981041 c:\users\nahue\onedrive\escritorio\sges_v0.9\clases\empleadoclase.h
+	<cstring>
+
+1698796477 c:\users\nahue\onedrive\escritorio\sges_v0.9\menues\menucombustible.h
+	"../clases/CombustibleClase.h"
+
+1698793598 c:\users\nahue\onedrive\escritorio\sges_v0.9\clases\combustibleclase.h
+
+1698796607 c:\users\nahue\onedrive\escritorio\sges_v0.9\menues\menucargacombustible.h
+	"../clases/CargaCombustibleClase.h"
+
+1698981502 c:\users\nahue\onedrive\escritorio\sges_v0.9\clases\cargacombustibleclase.h
+
+1698796715 c:\users\nahue\onedrive\escritorio\sges_v0.9\menues\menutiposervicios.h
+	"../clases/TipoServicioClase.h"
+
+1698981608 c:\users\nahue\onedrive\escritorio\sges_v0.9\clases\tiposervicioclase.h
+
+1698983974 c:\users\nahue\onedrive\escritorio\sges_v0.9\menues\menuventaservicios.h
+	"../clases/VentaServicioClase.h"
+
+1698984765 c:\users\nahue\onedrive\escritorio\sges_v0.9\clases\ventaservicioclase.h
+	<cstring>
+
+1698985671 c:\users\nahue\onedrive\escritorio\sges_v0.9\menues\menustocklist.h
+	"../clases/StockListClase.h"
+
+1698985638 c:\users\nahue\onedrive\escritorio\sges_v0.9\clases\stocklistclase.h
+
+1698986909 c:\users\nahue\onedrive\escritorio\sges_v0.9\menues\menuventakiosco.h
+	"../clases/VentaKioscoClase.h"
+
+1698986883 c:\users\nahue\onedrive\escritorio\sges_v0.9\clases\ventakioscoclase.h
+
+1698796917 c:\users\nahue\onedrive\escritorio\sges_v0.9\menues\menuclientes.h
+	"../clases/ClienteClase.h"
+
+1698787213 c:\users\nahue\onedrive\escritorio\sges_v0.9\clases\clienteclase.h
+	<cstring>
+
