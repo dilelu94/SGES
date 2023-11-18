@@ -18,6 +18,7 @@ public:
     void setCodigoServicio(int cod) { _codigoServicio = cod; }
     // gets
     int getServicio() { return _servicio; }
+    float getPrecio(){return _precio;}
     int getCodigoServicio() { return _codigoServicio; }
     bool getEstado() { return _estado; }
     // metodos
@@ -272,6 +273,27 @@ public:
             textColor(15, 0);
         }
         return escribio;
+    }
+
+    float devolverPrecio(int codServicio)
+    {
+        FILE *p;
+        TipoDeServicio ServicioX;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+        {
+            return -1;
+        }
+        while (fread(&ServicioX, sizeof(TipoDeServicio), 1, p) == 1)
+        {
+            if (ServicioX.getServicio() == codServicio)
+            {
+                fclose(p);
+                return ServicioX.getPrecio();
+            }
+        }
+        fclose(p);
+        return -1;
     }
 };
 #endif // TIPOSERVICIOCLASE_H_INCLUDED

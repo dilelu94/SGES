@@ -27,6 +27,9 @@ public:
     void setEstado(bool e) { _estado = e; }
     // gets
     int getNumeroVenta() { return _nVenta; }
+    int getCodigoArt(){return _codigoArt;}
+    int getCantidad(){return _cant;}
+    int getEmpleado(){return _codigoEmpleado;}
     bool getEstado() { return _estado; }
     // Metodos
     int cargar()
@@ -207,6 +210,14 @@ public:
         }
         kioscoX.setEstado(true);
         kioscoX.setNumeroVenta(buscarUltimoCodigo() + 1); // n de venta autoincremental
+        ///sumarle al empleado lo que gano por la venta del kiosco
+
+        ArchivoEmpleado archivoEmpleado;
+        ArchivoStock ArchivoStock;
+        float precioXArticulo = ArchivoStock.devolverPrecio(kioscoX.getCodigoArt());
+        float recaudacion = precioXArticulo * kioscoX.getCantidad();
+        archivoEmpleado.incrementarTotalRecaudado(kioscoX.getEmpleado(), recaudacion);
+
         int escribio = fwrite(&kioscoX, sizeof(Kiosco), 1, p);
         fclose(p);
         if (escribio == 1)
@@ -279,17 +290,21 @@ public:
         /// usar OBJ.cargar() para modificar los datos
         fseek(p, sizeof(Kiosco) * pos, SEEK_SET);
         fread(&kioscoX, sizeof(Kiosco), 1, p);
+        ///borrar recaudacion de Empleado
+        ArchivoEmpleado archivoEmpleado;
+        ArchivoStock ArchivoStock;
+        float precioXArticulo = ArchivoStock.devolverPrecio(kioscoX.getCodigoArt());
+        float recaudacion = precioXArticulo * kioscoX.getCantidad();
+        archivoEmpleado.decrementarTotalRecaudado(kioscoX.getEmpleado(), recaudacion);
+
         kioscoX.cargar();
+
+        ///agregar la nueva recaudacion de empleado
+        precioXArticulo = ArchivoStock.devolverPrecio(kioscoX.getCodigoArt());
+        recaudacion = precioXArticulo * kioscoX.getCantidad();
+        archivoEmpleado.incrementarTotalRecaudado(kioscoX.getEmpleado(), recaudacion);
+
         fseek(p, sizeof(Kiosco) * pos, SEEK_SET);
-        if (existeVentaServicio(kioscoX.getNumeroVenta()))
-        {
-            textColor(12, 0);
-            divisorSimple();
-            cout << "YA EXISTE UNA VENTA CON ESE NUMERO DE VENTA" << endl;
-            divisorSimple();
-            textColor(15, 0);
-            return -1;
-        }
         int escribio = fwrite(&kioscoX, sizeof(Kiosco), 1, p);
         fclose(p);
         if (escribio == 1)

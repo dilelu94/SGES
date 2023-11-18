@@ -208,7 +208,7 @@ void filtrarEmpleadosSueldos(){
 
     cargarVector(vec, tam);
 
-    cout<<"INGRESE LA CANTIDAD DE SUELDO POR LA QUE SE FILTRARA A LOS EMPLEADOS: ";
+    cout<<"INGRESE LA CANTIDAD DE SUELDO POR LA QUE SE ORDENARA A LOS EMPLEADOS: ";
     cin>>sueldo;
 
     mostrarVector(vec, tam, sueldo);

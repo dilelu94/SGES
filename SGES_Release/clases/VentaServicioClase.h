@@ -21,7 +21,9 @@ public:
     void setCodigoVenta(int cod) { _codVenta = cod; }
     /// gets
     int getCodigoVenta() { return _codVenta; }
+    int getTipoServicio(){return _servicioVendido;}
     bool getEstado() { return _estado; }
+    int getEmpleado(){return _empleado;}
     int getServicioVendido() { return _servicioVendido; }
     /// metodos
     bool cargar()
@@ -167,6 +169,11 @@ public:
         }
         ventaX.setEstado(true);
         ventaX.setCodigoVenta(buscarUltimoCodigo() + 1); // codigo de venta autoincremental
+        ///sumarle al empleado lo que gano por la venta de combustible
+        ArchivoEmpleado archivoEmpleado;
+        ArchivoTipoServicio archivoTipoServicio;
+        float precioXServicio = archivoTipoServicio.devolverPrecio(ventaX.getTipoServicio());
+        archivoEmpleado.incrementarTotalRecaudado(ventaX.getEmpleado(), precioXServicio);
         int escribio = fwrite(&ventaX, sizeof(VentaServicio), 1, p);
         fclose(p);
         if (escribio == 1)
@@ -204,6 +211,20 @@ public:
         ventaX.mostrar();
         fclose(p);
         return 1;
+    }
+
+    VentaServicio leerRegistroVentaServicio(int pos)
+    {
+        VentaServicio reg;
+        reg.setEstado(0);
+        FILE *p;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+            return reg;
+        fseek(p, sizeof reg * pos, 0);
+        fread(&reg, sizeof reg, 1, p);
+        fclose(p);
+        return reg;
     }
 
     VentaServicio leerRegistros()
@@ -249,7 +270,19 @@ public:
         /// usar OBJ.cargar() para modificar los datos
         fseek(p, sizeof(VentaServicio) * pos, SEEK_SET);
         fread(&ventaX, sizeof(VentaServicio), 1, p);
+        ///Borrar el ingreso viejo del empleado
+        ArchivoEmpleado archivoEmpleado;
+        ArchivoTipoServicio archivoTipoServicio;
+        float precioXServicio = archivoTipoServicio.devolverPrecio(ventaX.getTipoServicio());
+        archivoEmpleado.decrementarTotalRecaudado(ventaX.getEmpleado(), precioXServicio);
+
         ventaX.cargar();
+
+         ///Cargar el ingreso nuevo del empleado
+        precioXServicio = archivoTipoServicio.devolverPrecio(ventaX.getTipoServicio());
+        archivoEmpleado.incrementarTotalRecaudado(ventaX.getEmpleado(), precioXServicio);
+
+
         fseek(p, sizeof(VentaServicio) * pos, SEEK_SET);
         int escribio = fwrite(&ventaX, sizeof(VentaServicio), 1, p);
         fclose(p);

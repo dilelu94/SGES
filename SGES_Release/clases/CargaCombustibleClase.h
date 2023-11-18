@@ -216,7 +216,7 @@ public:
         }
         combustibleX.setEstado(true);
         combustibleX.setNumVenta(buscarUltimoCodigo() + 1); // n de venta autoincremental
-        //sumarle al empleado lo que gano por la venta de combustible
+        ///sumarle al empleado lo que gano por la venta de combustible
         ArchivoEmpleado archivoEmpleado;
         ArchivoCombustible archivoCombustible;
         float precioXLitro = archivoCombustible.devolverPrecio(combustibleX.getCodigoCombustible());
@@ -304,7 +304,20 @@ public:
             {
                 fseek(p, sizeof combustibleX * contCodComb, 0);
                 fread(&combustibleX, sizeof(CargaCombustible), 1, p);
+                ///Borrar el ingreso viejo del empleado
+                ArchivoEmpleado archivoEmpleado;
+                ArchivoCombustible archivoCombustible;
+                float precioXLitro = archivoCombustible.devolverPrecio(combustibleX.getCodigoCombustible());
+                float recaudacionEliminar = precioXLitro * combustibleX.getCantidadCargada();
+                archivoEmpleado.decrementarTotalRecaudado(combustibleX.getEmpleado(), recaudacionEliminar);
+
                 combustibleX.cargar();
+
+                ///Cargar el ingreso nuevo del empleado
+                precioXLitro = archivoCombustible.devolverPrecio(combustibleX.getCodigoCombustible());
+                float recaudacion = precioXLitro * combustibleX.getCantidadCargada();
+                archivoEmpleado.incrementarTotalRecaudado(combustibleX.getEmpleado(), recaudacion);
+
                 fseek(p, sizeof combustibleX * contCodComb, 0);
                 int escribio = fwrite(&combustibleX, sizeof combustibleX, 1, p);
                 fclose(p);

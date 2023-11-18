@@ -529,6 +529,57 @@ public:
         textColor(15, 0);
         return;
     }
+
+    void decrementarTotalRecaudado(int codEmpleado, float recaudacion)
+    {
+        FILE *p;
+        Empleado empleadoX;
+        p = fopen(nombre, "rb+");
+        if (p == NULL)
+            exit(1);
+        int contCodEmp = 0;
+        while (fread(&empleadoX, sizeof(Empleado), 1, p) == 1)
+        {
+            if (empleadoX.getCodigoEmp() == codEmpleado)
+            {
+                fseek(p, sizeof empleadoX * contCodEmp, 0);
+                fread(&empleadoX, sizeof(Empleado), 1, p);
+                empleadoX.setTotalRecaudado(empleadoX.getTotalRecaudado() - recaudacion);
+                fseek(p, sizeof empleadoX * contCodEmp, 0);
+                int escribio = fwrite(&empleadoX, sizeof empleadoX, 1, p);
+                fclose(p);
+                if (escribio == 1)
+                {
+                    system("cls");
+                    textColor(10, 0);
+                    divisorSimpleLargo();
+                    cout << "SE DECREMENTO EL TOTAL RECAUDADO DEL EMPLEADO EXITOSAMENTE :)" << endl;
+                    divisorSimpleLargo();
+                    textColor(15, 0);
+                    return;
+                }
+                else
+                {
+                    system("cls");
+                    textColor(12, 0);
+                    divisorSimpleLargo();
+                    cout << "NO SE PUDO DECREMENTAR EL TOTAL RECAUDADO DEL EMPLEADO :(" << endl;
+                    divisorSimpleLargo();
+                    textColor(15, 0);
+                    return;
+                }
+            }
+            contCodEmp++;
+        }
+        system("cls");
+        fclose(p);
+        textColor(12, 0);
+        divisorSimpleLargo();
+        cout << "NO SE ENCONTRO UN REGISTRO CON ESE CODIGO DE EMPLEADO" << endl;
+        divisorSimpleLargo();
+        textColor(15, 0);
+        return;
+    }
 };
 
 #endif // EMPLEADOCLASE_H_INCLUDED
