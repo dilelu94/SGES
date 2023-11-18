@@ -9,6 +9,7 @@ void mostrarEmpleados();
 void modificarEmpleado();
 void ordenarEmpleados();
 void borrarEmpleado();
+void filtrarEmpleadosSueldos();
 
 void menuEmpleados()
 {
@@ -105,7 +106,7 @@ void BuscarYMostrarEmpleado()
     cout << "\t EMPLEADO ENCONTRADO:" << endl;
     divisorDoble();
     textColor(15, 0);
-    
+
     archivo.leerRegistro(codEmp);
 }
 
@@ -141,6 +142,7 @@ void ordenarEmpleados()
 
     cout << "1- Cargo" << endl;
     cout << "2- Apellido" << endl;
+    cout << "3- Filtrar Empleados por Sueldos" << endl;
 
     cout << endl;
     divisorSimple();
@@ -155,6 +157,9 @@ void ordenarEmpleados()
         break;
     case 2:
         archivo.ordenarPorApellidoYMostrarlos();
+        break;
+    case 3:
+        filtrarEmpleadosSueldos();
         break;
     case 0:
         menuEmpleados();
@@ -171,6 +176,46 @@ void borrarEmpleado()
     cout << "Ingrese el codigo de empleado que desea borrar" << endl;
     cin >> codEmp;
     archivo.borrarEmpleado(codEmp);
+}
+
+void cargarVector(Empleado *v, int tam){
+    ArchivoEmpleado archi;
+    Empleado reg;
+
+    for(int i=0;i<tam;i++){
+        reg=archi.leerRegistroEmpleado(i);
+        v[i]=reg;
+    }
+}
+
+void mostrarVector(Empleado *v, int tam, float sueldo){
+    for(int i=0;i<tam;i++){
+        if(v[i].getSueldo()<=sueldo){
+            v[i].mostrar();
+        }
+    }
+}
+
+void filtrarEmpleadosSueldos(){
+    system("cls");
+    ArchivoEmpleado archi;
+    int tam=archi.contarRegistros();
+    int sueldo;
+
+    Empleado *vec;
+    vec = new Empleado[tam];
+    if(vec==NULL){exit(1);}
+
+    cargarVector(vec, tam);
+
+    cout<<"INGRESE LA CANTIDAD DE SUELDO POR LA QUE SE FILTRARA A LOS EMPLEADOS: ";
+    cin>>sueldo;
+
+    mostrarVector(vec, tam, sueldo);
+
+
+    delete vec;
+
 }
 
 #endif // MENUEMPLEADOS_H_INCLUDED

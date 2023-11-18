@@ -17,48 +17,94 @@ private:
 
 public:
     // sets
-    void setNumeroVenta(int n){_nVenta=n;}
+    void setNumeroVenta(int n) { _nVenta = n; }
     void setCodigoArt(int c) { _codigoArt = c; }
     void setCant(int ca) { _codigoArt = ca; }
     void setMedioPago(float mp) { _medioPago = mp; }
     /* void setHora(float h){_hora=h;} */
     void setCodigoEmpleado(float ce) { _codigoEmpleado = ce; }
     void setTotal(float t) { _total = t; }
-    void setEstado(bool e){_estado=e;}
-    //gets
-    int getNumeroVenta(){return _nVenta;}
-    bool getEstado(){return _estado;}
+    void setEstado(bool e) { _estado = e; }
+    // gets
+    int getNumeroVenta() { return _nVenta; }
+    bool getEstado() { return _estado; }
     // Metodos
     int cargar()
     {
-        cout << "INGRESE NUMERO DE LA VENTA: " << endl;
-        cin >> _nVenta;
+        // nVenta es autoincremental
         cout << "INGRESE CODIGO DE ARTICULO VENDIDO: " << endl;
         cin >> _codigoArt;
 
-        ArchivoStock archivo;
-        int precio;
-        precio = archivo.devolverPrecio(_codigoArt);
+        ArchivoStock archivoStock;
+        ArchivoEmpleado ArchivoEmpleado;
+        float precio;
+        precio = archivoStock.devolverPrecio(_codigoArt);
         if (precio == -1)
         {
+            textColor(12, 0);
+            divisorSimple();
             cout << "CODIGO DE ARTICULO INEXISTENTE" << endl;
+            divisorSimple();
+            textColor(15, 0);
             system("pause");
             return -1;
         }
 
         cout << "INGRESE CANTIDAD: " << endl;
         cin >> _cant;
+        if (_cant <= 0)
+        {
+            textColor(12, 0);
+            divisorSimpleLargo();
+            cout << "ERROR: VUELVA A INTENTAR E INGRESE UNA CANTIDAD VALIDA" << endl;
+            divisorSimpleLargo();
+            textColor(15, 0);
+            return -1;
+        }
         cout << "INGRESE MEDIO DE PAGO: (1-Tarjeta 2-Efectivo)" << endl;
         cin >> _medioPago;
+        if (_medioPago < 1 || _medioPago > 2)
+        {
+            textColor(12, 0);
+            divisorSimpleLargo();
+            cout << "ERROR: VUELVA A INTENTAR E INGRESE UN MEDIO DE PAGO VALIDO" << endl;
+            divisorSimpleLargo();
+            textColor(15, 0);
+            return -1;
+        }
         cout << "INGRESE HORA: " << endl;
         cin >> _hora;
+        if (_hora < 0 || _hora > 23)
+        {
+            textColor(12, 0);
+            divisorSimpleLargo();
+            cout << "ERROR: VUELVA A INTENTAR E INGRESE UNA HORA VALIDA" << endl;
+            divisorSimpleLargo();
+            textColor(15, 0);
+            return -1;
+        }
         cout << "INGRESE CODIGO DE EMPLEADO ATENDIENDO: " << endl;
         cin >> _codigoEmpleado;
+        if (!ArchivoEmpleado.existeEmpleado(_codigoEmpleado))
+        {
+            textColor(12, 0);
+            divisorSimple();
+            cout << "CODIGO DE EMPLEADO INEXISTENTE" << endl;
+            divisorSimple();
+            textColor(15, 0);
+            system("pause");
+            return -1;
+        }
         _total = _cant * precio;
         return 1;
     }
     void mostrar()
     {
+        if (_estado == false)
+        {
+            return;
+        }
+        cout << endl;
         cout << "NUMERO DE VENTA: " << _nVenta << endl;
         cout << "CODIGO DE ARTICULO VENDIDO: " << _codigoArt << endl;
         cout << "CANTIDAD: " << _cant << endl;
@@ -66,6 +112,8 @@ public:
         cout << "HORA: " << _hora << endl;
         cout << "CODIGO DE EMPLEADO ATENDIENDO: " << _codigoEmpleado << endl;
         cout << "TOTAL: " << _total << endl;
+        cout << endl;
+        divisorSimple();
     }
 };
 
@@ -110,6 +158,24 @@ public:
         return -1;
     }
 
+    int buscarUltimoCodigo()
+    {
+        FILE *p;
+        Kiosco kioscoX;
+        int codigo = 0;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+        {
+            return -1;
+        }
+        while (fread(&kioscoX, sizeof(Kiosco), 1, p) == 1)
+        {
+            codigo = kioscoX.getNumeroVenta();
+        }
+        fclose(p);
+        return codigo;
+    }
+
     bool existeVentaServicio(int numeroDeVenta)
     {
         FILE *p;
@@ -140,16 +206,7 @@ public:
             return -1;
         }
         kioscoX.setEstado(true);
-        // verificar si ya existe ese codigo de combustible
-        if (existeVentaServicio(kioscoX.getNumeroVenta()))
-        {
-            textColor(12, 0);
-            divisorSimple();
-            cout << "YA EXISTE UNA VENTA CON ESE NUMERO DE VENTA" << endl;
-            divisorSimple();
-            textColor(15, 0);
-            return -1;
-        }
+        kioscoX.setNumeroVenta(buscarUltimoCodigo() + 1); // n de venta autoincremental
         int escribio = fwrite(&kioscoX, sizeof(Kiosco), 1, p);
         fclose(p);
         if (escribio == 1)
@@ -264,9 +321,9 @@ public:
         fread(&kioscoX, sizeof(Kiosco), 1, p);
         kioscoX.setEstado(false);
         fseek(p, sizeof(Kiosco) * pos, SEEK_SET);
-        fwrite(&kioscoX, sizeof(Kiosco), 1, p);
+        int escribio = fwrite(&kioscoX, sizeof(Kiosco), 1, p);
         fclose(p);
-        return 1;
+        return escribio;
     }
 };
 

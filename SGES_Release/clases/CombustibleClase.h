@@ -28,8 +28,7 @@ public:
     // Metodos
     bool cargar()
     {
-        cout << "INGRESE ID DE COMBUSTIBLE: " << endl;
-        cin >> _codigoCombustible;
+        // codCombustible es autoincremental
         cout << "INGRESE EL TIPO DE COMBUSTIBLE(1:Super, 2:Premium, 3:Gasoil): " << endl;
         cin >> _tipoCombustible;
         switch (_tipoCombustible)
@@ -135,6 +134,21 @@ public:
         strcpy(nombre, e);
     }
 
+    int contarRegistros()
+    {
+        FILE *p;
+        int cantRegistros;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+        {
+            return 0;
+        }
+        fseek(p, 0, SEEK_END);
+        cantRegistros = ftell(p) / sizeof(Combustible);
+        fclose(p);
+        return cantRegistros;
+    }
+
     int buscarPosicion(int codigoCombustible)
     {
         FILE *p;
@@ -163,6 +177,24 @@ public:
         textColor(15, 0);
 
         return -1;
+    }
+
+    int buscarUltimoCodigo()
+    {
+        FILE *p;
+        Combustible combustibleX;
+        int codigo = 0;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+        {
+            return -1;
+        }
+        while (fread(&combustibleX, sizeof(Combustible), 1, p) == 1)
+        {
+            codigo = combustibleX.getCodigoCombustible();
+        }
+        fclose(p);
+        return codigo;
     }
 
     bool existeCombustible(int codigoCombustible)
@@ -195,16 +227,7 @@ public:
             return -1;
         }
         combustibleX.setEstado(true);
-        // verificar si ya existe ese codigo de combustible
-        if (existeCombustible(combustibleX.getCodigoCombustible()))
-        {
-            textColor(12, 0);
-            divisorSimple();
-            cout << "YA EXISTE UN COMBUSTIBLE CON ESE CODIGO" << endl;
-            divisorSimple();
-            textColor(15, 0);
-            return -1;
-        }
+        combustibleX.setCodigoCombustible(buscarUltimoCodigo() + 1); // codigo de combustible autoincremental
         int escribio = fwrite(&combustibleX, sizeof(Combustible), 1, p);
         fclose(p);
         if (escribio == 1)
@@ -237,6 +260,20 @@ public:
         combustibleX.mostrar();
         fclose(p);
         return 1;
+    }
+
+    Combustible leerRegistroObj(int pos)
+    {
+        Combustible reg;
+        FILE *p = fopen(nombre, "rb");
+        if (p == NULL)
+        {
+            return reg;
+        }
+        fseek(p, pos * sizeof reg, 0);
+        fread(&reg, sizeof reg, 1, p);
+        fclose(p);
+        return reg;
     }
 
     Combustible leerRegistros()
@@ -279,15 +316,6 @@ public:
         fread(&combustibleX, sizeof(Combustible), 1, p);
         combustibleX.cargar();
         fseek(p, sizeof(Combustible) * pos, SEEK_SET);
-        if (existeCombustible(combustibleX.getCodigoCombustible()))
-        {
-            textColor(12, 0);
-            divisorSimple();
-            cout << "YA EXISTE UN COMBUSTIBLE CON ESE CODIGO" << endl;
-            divisorSimple();
-            textColor(15, 0);
-            return -1;
-        }
         int escribio = fwrite(&combustibleX, sizeof(Combustible), 1, p);
         fclose(p);
         if (escribio == 1)
@@ -322,6 +350,27 @@ public:
         fwrite(&combustibleX, sizeof(Combustible), 1, p);
         fclose(p);
         return 1;
+    }
+
+    float devolverPrecio(int codCombustible)
+    {
+        FILE *p;
+        Combustible combustibleX;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+        {
+            return -1;
+        }
+        while (fread(&combustibleX, sizeof(Combustible), 1, p) == 1)
+        {
+            if (combustibleX.getCodigoCombustible() == codCombustible)
+            {
+                fclose(p);
+                return combustibleX.getPrecio();
+            }
+        }
+        fclose(p);
+        return -1;
     }
 };
 

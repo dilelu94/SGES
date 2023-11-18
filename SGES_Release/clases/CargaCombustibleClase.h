@@ -3,11 +3,14 @@
 
 class CargaCombustible;
 
+bool existeEmpleado(int);    // estos ya no se usan
+bool existeCombustible(int); // estos ya no se usan
+
 class CargaCombustible
 {
 private:
-    int _numVentaCombustible; // para que la vida sea mas facil
-    int _tipoCombustible;
+    int _numVentaCombustible; // autoincremental
+    int _codigoCombustible;
     int _medioDePago;
     float _cantidadCargada;
     int _horaCarga;
@@ -16,38 +19,31 @@ private:
 
 public:
     // sets
+    void setNumVenta(int n) { _numVentaCombustible = n; }
     void setEstado(bool e) { _estado = e; }
     // gets
     int getNumVenta() { return _numVentaCombustible; }
     bool getEstado() { return _estado; }
     int getNumVentaCombustible() { return _numVentaCombustible; }
+    float getCantidadCargada() { return _cantidadCargada; }
+    int getEmpleado() { return _empleado; }
+    int getCodigoCombustible() { return _codigoCombustible; }
     // metodos
     bool cargar()
     {
-        cout << "INGRESE EL NUMERO DE LA VENTA: " << endl;
-        cin >> _numVentaCombustible;
-        cout << "INGRESE EL TIPO DE COMBUSTIBLE(1:Super, 2:Premium, 3:Gasoil): " << endl;
-        cin >> _tipoCombustible;
-        switch (_tipoCombustible)
+        // nVenta es autoincremental
+        cout << "INGRESE EL CODIGO DE COMBUSTIBLE: " << endl;
+        cin >> _codigoCombustible;
+        ArchivoCombustible archivoCombustible;
+        if (!archivoCombustible.existeCombustible(_codigoCombustible))
         {
-        case 1:
-            _tipoCombustible = 1;
-            break;
-        case 2:
-            _tipoCombustible = 2;
-            break;
-        case 3:
-            _tipoCombustible = 3;
-            break;
-        default:
             system("cls");
             textColor(12, 0);
             divisorSimple();
-            cout << "TIPO DE COMBUSTIBLE INCORRECTO" << endl;
+            cout << "COMBUSTIBLE INEXISTENTE, VUELVA A INTENTAR." << endl;
             divisorSimple();
             textColor(15, 0);
             return false;
-            break;
         }
         cout << "INGRESE MEDIO DE PAGO(1:Efectivo, 2:Credito, 3:Debito): " << endl;
         cin >> _medioDePago;
@@ -74,11 +70,42 @@ public:
         }
         cout << "INGRESE CANTIDAD DE LITROS CARGADA: " << endl;
         cin >> _cantidadCargada;
+        if (_cantidadCargada <= 0)
+        {
+            system("cls");
+            textColor(12, 0);
+            divisorSimple();
+            cout << "CANTIDAD INCORRECTA" << endl;
+            divisorSimple();
+            textColor(15, 0);
+            return false;
+        }
         cout << "INGRESE HORA DE CARGA: " << endl;
         cin >> _horaCarga;
+        if (_horaCarga < 0 || _horaCarga > 23)
+        {
+            system("cls");
+            textColor(12, 0);
+            divisorSimple();
+            cout << "HORA INCORRECTA" << endl;
+            divisorSimple();
+            textColor(15, 0);
+            return false;
+        }
         cout << "INGRESE EMPLEADO QUE REALIZO LA CARGA: " << endl;
         cin >> _empleado;
-        _estado=true;
+        ArchivoEmpleado archivoEmpleado;
+        if (!archivoEmpleado.existeEmpleado(_empleado))
+        {
+            system("cls");
+            textColor(12, 0);
+            divisorSimple();
+            cout << "EMPLEADO INEXISTENTE, VUELVA A INTENTAR." << endl;
+            divisorSimple();
+            textColor(15, 0);
+            return false;
+        }
+        _estado = true;
         return true;
     }
     void mostrar()
@@ -89,19 +116,7 @@ public:
         } // si el estado es falso no muestra nada
         cout << endl;
         cout << "NUMERO DE VENTA: " << _numVentaCombustible << endl;
-        cout << "TIPO DE COMBUSTIBLE: ";
-        if (_tipoCombustible == 1)
-        {
-            cout << "Super" << endl;
-        }
-        else if (_tipoCombustible == 2)
-        {
-            cout << "Premium" << endl;
-        }
-        else
-        {
-            cout << "Gasoil" << endl;
-        }
+        cout << "CODIGO DE COMBUSTIBLE: " << _codigoCombustible << endl;
         cout << "MEDIO DE PAGO: ";
         if (_medioDePago == 1)
         {
@@ -154,6 +169,24 @@ public:
         return -1;
     }
 
+    buscarUltimoCodigo()
+    {
+        FILE *p;
+        CargaCombustible combustibleX;
+        int codigo = 0;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+        {
+            return -1;
+        }
+        while (fread(&combustibleX, sizeof(CargaCombustible), 1, p) == 1)
+        {
+            codigo = combustibleX.getNumVenta();
+        }
+        fclose(p);
+        return codigo;
+    }
+
     bool existeNumeroDeVentaCombustible(int codVent)
     {
         FILE *p;
@@ -178,21 +211,32 @@ public:
         FILE *p;
         p = fopen(nombre, "ab");
         if (p == NULL)
-            exit(1);
-        if (existeNumeroDeVentaCombustible(combustibleX.getNumVentaCombustible()))
         {
-            system("cls");
-            textColor(12, 0);
-            divisorSimpleLargo();
-            cout << "YA EXISTE UNA VENTA DE COMBUSTIBLE CON ESE NUMERO" << endl;
-            divisorSimpleLargo();
-            textColor(15, 0);
-            fclose(p);
             return false;
         }
-        bool escribio = fwrite(&combustibleX, sizeof combustibleX, 1, p);
+        combustibleX.setEstado(true);
+        combustibleX.setNumVenta(buscarUltimoCodigo() + 1); // n de venta autoincremental
+        //sumarle al empleado lo que gano por la venta de combustible
+        ArchivoEmpleado archivoEmpleado;
+        ArchivoCombustible archivoCombustible;
+        float precioXLitro = archivoCombustible.devolverPrecio(combustibleX.getCodigoCombustible());
+        float recaudacion = precioXLitro * combustibleX.getCantidadCargada();
+        archivoEmpleado.incrementarTotalRecaudado(combustibleX.getEmpleado(), recaudacion);
+        int escribio = fwrite(&combustibleX, sizeof(CargaCombustible), 1, p);
         fclose(p);
-        return escribio;
+        if (escribio == 1)
+        {
+            textColor(10, 0);
+            divisorSimple();
+            cout << "SE CARGO LA VENTA DE COMBUSTIBLE. :)" << endl;
+            divisorSimple();
+            textColor(15, 0);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     int leerRegistro(int codVent)
@@ -262,18 +306,6 @@ public:
                 fread(&combustibleX, sizeof(CargaCombustible), 1, p);
                 combustibleX.cargar();
                 fseek(p, sizeof combustibleX * contCodComb, 0);
-                //si existe cod comb no lo deja modificar
-                if (existeNumeroDeVentaCombustible(codVent))
-                {
-                    system("cls");
-                    textColor(12, 0);
-                    divisorSimpleLargo();
-                    cout << "YA EXISTE UNA VENTA DE COMBUSTIBLE CON ESE NUMERO" << endl;
-                    divisorSimpleLargo();
-                    textColor(15, 0);
-                    fclose(p);
-                    return 1;
-                }
                 int escribio = fwrite(&combustibleX, sizeof combustibleX, 1, p);
                 fclose(p);
                 if (escribio)
@@ -358,5 +390,37 @@ public:
         return -1;
     };
 };
+
+bool existeEmpleado(int empleado)
+{
+    ArchivoEmpleado archi;
+    bool x;
+
+    x = archi.existeEmpleado(empleado);
+    if (x == true)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool existeCombustible(int combustible)
+{
+    ArchivoCombustible archi;
+    bool x;
+
+    x = archi.existeCombustible(combustible);
+    if (x == true)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 #endif // CARGACOMBUSTIBLECLASE_H_INCLUDED

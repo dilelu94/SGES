@@ -12,10 +12,11 @@ private:
     char _nombre[30];
     char _apellido[30];
     int _edad;
-    int _telefono;
+    char _telefono[40];
     int _DNI;
     float _sueldo;
     char _cargo[30];
+    float _totalRec = 0;
     bool _estado;
 
 public:
@@ -24,31 +25,22 @@ public:
     void setNombre(const char *n) { strcpy(_nombre, n); }
     void setApellido(const char *a) { strcpy(_apellido, a); }
     void setEdad(int ed) { _edad = ed; }
-    void setTeledono(int t) { _telefono = t; }
     void setDNI(int d) { _DNI = d; }
     void setSueldo(float s) { _sueldo = s; }
     void setCargo(const char *c) { strcpy(_cargo, c); }
     void setEstado(bool e) { _estado = e; }
+    void setTotalRecaudado(float r) { _totalRec = r; }
     // gets
     int getCodigoEmp() { return _codigoEmpleado; }
     bool getEstado() { return _estado; }
     const char *getCargo() { return _cargo; }
     const char *getApellido() { return _apellido; }
+    float getSueldo() { return _sueldo; }
+    float getTotalRecaudado() { return _totalRec; }
     // Metodos
     bool cargar()
     {
-        cout << "INGRESE CODIGO DE EMPLEADO: " << endl;
-        cin >> _codigoEmpleado;
-        if (_codigoEmpleado < 0)
-        {
-            system("cls");
-            textColor(12, 0);
-            divisorSimple();
-            cout << "EL CODIGO DE EMPLEADO NO PUEDE SER NEGATIVO" << endl;
-            divisorSimple();
-            textColor(15, 0);
-            return false;
-        }
+        // cEmpleado es autoincremental
         cout << "INGRESE NOMBRE: " << endl;
         cin >> _nombre;
         cout << "INGRESE APELLIDO: " << endl;
@@ -66,8 +58,8 @@ public:
             return false;
         }
         cout << "INGRESE N. TELEFONO: " << endl;
-        cin >> _telefono;
-        if (_telefono < 0)
+        cargarCadena(_telefono, 39);
+        if (_telefono[0] < 0)
         {
             system("cls");
             textColor(12, 0);
@@ -104,6 +96,7 @@ public:
         cout << "INGRESE NOMBRE DEL CARGO" << endl;
         cargarCadena(_cargo, 30);
         /* _estado = true; */ // el setEstado(true) ya se hace en el agregarRegistro() de ArchivoEmpleado
+        /* _totalRec = 0; */
         return true;
     }
     void mostrar()
@@ -120,6 +113,7 @@ public:
         cout << "TELEFONO: " << _telefono << endl;
         cout << "DNI: " << _DNI << endl;
         cout << "SUELDO: " << _sueldo << endl;
+        cout << "TOTAL RECAUDADO: " << _totalRec << endl;
         cout << "CARGO: " << _cargo << endl;
         cout << endl;
         divisorSimple();
@@ -171,6 +165,24 @@ public:
         return -1;
     }
 
+    int buscarUltimoCodigo()
+    {
+        FILE *p;
+        Empleado empleadoX;
+        int codigo = 0;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+        {
+            return -1;
+        }
+        while (fread(&empleadoX, sizeof(Empleado), 1, p) == 1)
+        {
+            codigo = empleadoX.getCodigoEmp();
+        }
+        fclose(p);
+        return codigo;
+    }
+
     bool existeEmpleado(int codEmp)
     {
         FILE *p;
@@ -199,6 +211,7 @@ public:
             return -1;
         }
         empleadoX.setEstado(true);
+        empleadoX.setCodigoEmpleado(buscarUltimoCodigo() + 1); // codigo de empleado autoincremental
         if (existeEmpleado(empleadoX.getCodigoEmp()))
         {
             system("cls");
@@ -246,6 +259,20 @@ public:
         return -1;
     }
 
+    Empleado leerRegistroEmpleado(int pos)
+    {
+        Empleado reg;
+        reg.setEstado(0);
+        FILE *p;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+            return reg;
+        fseek(p, sizeof reg * pos, 0);
+        fread(&reg, sizeof reg, 1, p);
+        fclose(p);
+        return reg;
+    }
+
     Empleado leerRegistros()
     {
         FILE *p;
@@ -280,18 +307,11 @@ public:
                 fseek(p, sizeof empleadoX * contCodEmp, 0);
                 fread(&empleadoX, sizeof(Empleado), 1, p);
                 empleadoX.cargar();
+                cout << "INGRESE RECAUDACION TOTAL DEL EMPLEADO: " << endl;
+                float nuevaRecaudacion;
+                cin >> nuevaRecaudacion;
+                empleadoX.setTotalRecaudado(nuevaRecaudacion);
                 fseek(p, sizeof empleadoX * contCodEmp, 0);
-                if (existeEmpleado(empleadoX.getCodigoEmp()))
-                {
-                    system("cls");
-                    textColor(12, 0);
-                    divisorSimple();
-                    cout << "YA EXISTE UN EMPLEADO CON ESE CODIGO" << endl;
-                    divisorSimple();
-                    textColor(15, 0);
-                    fclose(p);
-                    return -1;
-                }
                 int escribio = fwrite(&empleadoX, sizeof empleadoX, 1, p);
                 fclose(p);
                 if (escribio)
@@ -458,6 +478,57 @@ public:
         system("pause");
         return;
     };
+
+    void incrementarTotalRecaudado(int codEmpleado, float recaudacion)
+    {
+        FILE *p;
+        Empleado empleadoX;
+        p = fopen(nombre, "rb+");
+        if (p == NULL)
+            exit(1);
+        int contCodEmp = 0;
+        while (fread(&empleadoX, sizeof(Empleado), 1, p) == 1)
+        {
+            if (empleadoX.getCodigoEmp() == codEmpleado)
+            {
+                fseek(p, sizeof empleadoX * contCodEmp, 0);
+                fread(&empleadoX, sizeof(Empleado), 1, p);
+                empleadoX.setTotalRecaudado(empleadoX.getTotalRecaudado() + recaudacion);
+                fseek(p, sizeof empleadoX * contCodEmp, 0);
+                int escribio = fwrite(&empleadoX, sizeof empleadoX, 1, p);
+                fclose(p);
+                if (escribio == 1)
+                {
+                    system("cls");
+                    textColor(10, 0);
+                    divisorSimpleLargo();
+                    cout << "SE INCREMENTO EL TOTAL RECAUDADO DEL EMPLEADO EXITOSAMENTE :)" << endl;
+                    divisorSimpleLargo();
+                    textColor(15, 0);
+                    return;
+                }
+                else
+                {
+                    system("cls");
+                    textColor(12, 0);
+                    divisorSimpleLargo();
+                    cout << "NO SE PUDO INCREMENTAR EL TOTAL RECAUDADO DEL EMPLEADO :(" << endl;
+                    divisorSimpleLargo();
+                    textColor(15, 0);
+                    return;
+                }
+            }
+            contCodEmp++;
+        }
+        system("cls");
+        fclose(p);
+        textColor(12, 0);
+        divisorSimpleLargo();
+        cout << "NO SE ENCONTRO UN REGISTRO CON ESE CODIGO DE EMPLEADO" << endl;
+        divisorSimpleLargo();
+        textColor(15, 0);
+        return;
+    }
 };
 
 #endif // EMPLEADOCLASE_H_INCLUDED

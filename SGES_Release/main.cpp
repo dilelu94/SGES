@@ -11,6 +11,7 @@ using namespace std;
 #include "menues/menuStockList.h"
 #include "menues/menuVentaKiosco.h"
 #include "menues/menuClientes.h"
+#include "menues/menuConfiguracion.h"
 
 int main()
 {
@@ -33,9 +34,10 @@ int main()
         cout << "3- Seccion Cargas de Combustible" << endl;
         cout << "4- Seccion Tipos de Servicios" << endl;
         cout << "5- Seccion Ventas de Servicio" << endl;
-        cout << "6- Seccion stock Kiosco" << endl;
-        cout << "7- Seccion ventas de kiosco" << endl;
-        cout << "8- Seccion clientes" << endl;
+        cout << "6- Seccion Stock Kiosco" << endl;
+        cout << "7- Seccion Ventas de Kiosco" << endl;
+        cout << "8- Seccion Clientes" << endl;
+        cout << "9- Seccion configuracion" << endl;
 
         cout << endl;
         divisorSimple();
@@ -69,6 +71,9 @@ int main()
             break;
         case 8:
             menuClientes();
+            break;
+        case 9:
+            menuConfiguracion();
             break;
         case 0:
             return 0;

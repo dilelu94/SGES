@@ -29,14 +29,22 @@ public:
     // Metodos
     void cargar()
     {
-        cout << "INGRESE N. DE CLIENTE: " << endl;
-        cin >> _numeroCliente;
+        // nCliente es autoincremental
         cout << "INGRESE NOMBRE: " << endl;
         cin >> _nombre;
         cout << "INGRESE APELLIDO: " << endl;
         cin >> _apellido;
         cout << "INGRESE DNI: " << endl;
         cin >> _DNI;
+        if (_DNI <= 0)
+        {
+            textColor(12, 0);
+            divisorSimpleLargo();
+            cout << "ERROR: VUELVA A INTENTAR E INGRESE UN DNI VALIDO" << endl;
+            divisorSimpleLargo();
+            textColor(15, 0);
+            return;
+        }
         cout << "INGRESE N. TELEFONO: " << endl;
         cin >> _telefono;
     }
@@ -88,6 +96,24 @@ public:
         return -1;
     }
 
+    int buscarUltimoCodigo()
+    {
+        FILE *p;
+        Cliente clienteX;
+        int codigo = 0;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+        {
+            return -1;
+        }
+        while (fread(&clienteX, sizeof(Cliente), 1, p) == 1)
+        {
+            codigo = clienteX.getNumeroCliente();
+        }
+        fclose(p);
+        return codigo;
+    }
+
     bool existeCliente(int codCliente)
     {
         FILE *p;
@@ -109,32 +135,27 @@ public:
         return false;
     }
 
-    int agregarRegistro(Cliente x)
+    int agregarRegistro(Cliente clienteX)
     {
         FILE *p;
         p = fopen(nombre, "ab");
         if (p == NULL)
-            return -1;
-        int numCliente = buscarNumCliente(x.getNumeroCliente());
-        if (numCliente == -1)
         {
-            x.setEstado(true);
-            int escribio = fwrite(&x, sizeof x, 1, p);
-            fclose(p);
-            return escribio;
-        }
-        else if (x.getEstado() == false)
-        {
-            cout << "hay un registro DADO DE BAJA con ese NUMERO DE CLIENTE";
-            fclose(p);
             return -1;
         }
-        else
+        clienteX.setEstado(true);
+        clienteX.setNumeroCliente(buscarUltimoCodigo() + 1); // codigo de cliente autoincremental
+        int escribio = fwrite(&clienteX, sizeof(Cliente), 1, p);
+        fclose(p);
+        if (escribio == 1)
         {
-            cout << "hay un registro con ese NUMERO DE CLIENTE";
-            fclose(p);
-            return -1;
+            textColor(10, 0);
+            divisorSimple();
+            cout << "SE AGREGO EL CLIENTE EXITOSAMENTE :)" << endl;
+            divisorSimple();
+            textColor(15, 0);
         }
+        return escribio;
     }
 
     int leerRegistro(int numCliente)

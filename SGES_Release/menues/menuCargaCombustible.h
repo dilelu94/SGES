@@ -84,7 +84,7 @@ void BuscarYMostrarVentaCombustible()
     ArchivoCargaCombustible archivo;
     int numCodVenta;
 
-    cout << "Ingrese el codigo de venta de combus que desea buscar" << endl;
+    cout << "Ingrese el codigo de venta de combustible que desea buscar" << endl;
     cin >> numCodVenta;
     system("cls");
     textColor(14, 0);
