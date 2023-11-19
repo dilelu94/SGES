@@ -90,6 +90,7 @@ void mostrarVentasKiosco(){
     ArchivoKiosco file;
 
     file.leerRegistros();
+    file.stadistiaVentasDeKiosco();
 }
 
 void modificarVentaKiosco(){

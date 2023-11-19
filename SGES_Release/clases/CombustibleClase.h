@@ -372,6 +372,7 @@ public:
         fclose(p);
         return -1;
     }
+    
 };
 
 #endif // COMBUSTIBLECLASE_H_INCLUDED

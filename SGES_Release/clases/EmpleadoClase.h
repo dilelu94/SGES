@@ -37,6 +37,7 @@ public:
     const char *getApellido() { return _apellido; }
     float getSueldo() { return _sueldo; }
     float getTotalRecaudado() { return _totalRec; }
+    int getEdad() { return _edad; }
     // Metodos
     bool cargar()
     {
@@ -396,6 +397,91 @@ public:
         textColor(15, 0);
         return -1;
     };
+
+    bool estadisticaEmpleados()
+    {
+        FILE *p;
+        Empleado empleadoX;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+        {
+            exit(1);
+        }
+        int cantidadDeEmpleados = 0;
+        float promedioEdades = 0;
+        float promedioSueldos = 0;
+        int codigoEmpleadoConMayorRecaudacion = 0;
+        float mayorRecaudacion = 0;
+        int codigoEmpleadoConMenorRecaudacion = 0;
+        float menorRecaudacion = 0;
+        float totalRecaudado = 0;
+        bool primerEmpleadoLeido = false;
+        while (fread(&empleadoX, sizeof(Empleado), 1, p) == 1)
+        {
+            if (empleadoX.getEstado() == true)
+            {
+                if (primerEmpleadoLeido == false)
+                {
+                    menorRecaudacion = empleadoX.getTotalRecaudado();
+                    primerEmpleadoLeido = true;
+                }
+                cantidadDeEmpleados++;
+                totalRecaudado += empleadoX.getTotalRecaudado();
+                promedioEdades += empleadoX.getEdad();
+                promedioSueldos += empleadoX.getSueldo();
+                if (empleadoX.getTotalRecaudado() > mayorRecaudacion)
+                {
+                    mayorRecaudacion = empleadoX.getTotalRecaudado();
+                    codigoEmpleadoConMayorRecaudacion = empleadoX.getCodigoEmp();
+                }
+                if (empleadoX.getTotalRecaudado() < menorRecaudacion)
+                {
+                    menorRecaudacion = empleadoX.getTotalRecaudado();
+                    codigoEmpleadoConMenorRecaudacion = empleadoX.getCodigoEmp();
+                }
+            }
+        }
+        fclose(p);
+        promedioEdades = promedioEdades / cantidadDeEmpleados;
+        promedioSueldos = promedioSueldos / cantidadDeEmpleados;
+        // mostrar estadisticas y dibujar recuadro
+        int x = 50, y = 1;
+        if (cantidadDeEmpleados == 0)
+        {
+            return false;
+        }
+        if (totalRecaudado > 999)
+        {
+            x = 49;
+        }
+        if (totalRecaudado > 9999)
+        {
+            x = 52;
+        }
+        int base = 48, altura = 10;
+        textColor(1, 0);
+        dibujarRecuadro(base, altura, x - 2, 0); // x-2 para que halla un espacio entre pared y texto
+        textColor(15, 0);
+        gotoxy(x, y);
+        cout << "ESTADISTICAS DE EMPLEADOS" << endl;
+        y += 1;
+        gotoxy(x, y + 1);
+        cout << "CANTIDAD DE EMPLEADOS: " << cantidadDeEmpleados << endl;
+        gotoxy(x, y + 2);
+        cout << "PROMEDIO DE EDADES: " << promedioEdades << endl;
+        gotoxy(x, y + 3);
+        cout << "PROMEDIO DE SUELDOS: " << promedioSueldos << endl;
+        gotoxy(x, y + 4);
+        cout << "CODIGO EMPLEADO CON MAYOR RECAUDACION: " << codigoEmpleadoConMayorRecaudacion << endl;
+        gotoxy(x, y + 5);
+        cout << "CODIGO EMPLEADO CON MENOR RECAUDACION: " << codigoEmpleadoConMenorRecaudacion << endl;
+        gotoxy(x, y + 6);
+        textColor(10, 0);
+        cout << "TOTAL RECAUDADO POR TODOS LOS EMPLEADOS: " << totalRecaudado << endl;
+        textColor(15, 0);
+        cout << endl;
+        return true;
+    }
 
     void ordenarPorCargoYMostrarlos()
     {

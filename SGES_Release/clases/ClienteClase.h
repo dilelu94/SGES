@@ -205,28 +205,33 @@ public:
     int modificarRegistro(int numCliente)
     {
         FILE *p;
-        Cliente x;
+        int pos = buscarNumCliente(numCliente);
+        Cliente clienteX;
+        if (pos == -1)
+        {
+            return -1;
+        }
         p = fopen(nombre, "rb+");
         if (p == NULL)
-            exit(1);
-        int contNumCliente = 0;
-        while (fread(&x, sizeof(Empleado), 1, p) == 1)
         {
-            if (x.getNumeroCliente() == numCliente)
-            {
-                fseek(p, sizeof x * contNumCliente, 0);
-                fread(&x, sizeof(Empleado), 1, p);
-                x.cargar();
-                fseek(p, sizeof x * contNumCliente, 0);
-                int escribio = fwrite(&x, sizeof x, 1, p);
-                fclose(p);
-                return escribio;
-            }
-            contNumCliente++;
+            return -1;
         }
+        // usar clienteX para cargar los datos nuevos
+        fseek(p, sizeof(Cliente) * pos, SEEK_SET);
+        fread(&clienteX, sizeof(Cliente), 1, p);
+        clienteX.cargar();
+        fseek(p, sizeof(Cliente) * pos, SEEK_SET);
+        int escribio = fwrite(&clienteX, sizeof(Cliente), 1, p);
         fclose(p);
-        cout << "NO SE ENCONTRO UN REGISTRO CON ESE NUMERO DE CLIENTE";
-        return -1;
+        if (escribio == 1)
+        {
+            textColor(10, 0);
+            divisorSimple();
+            cout << "SE MODIFICO EL CLIENTE EXITOSAMENTE :)" << endl;
+            divisorSimple();
+            textColor(15, 0);
+        }
+        return escribio;
     }
 
     // baja logica estado = false

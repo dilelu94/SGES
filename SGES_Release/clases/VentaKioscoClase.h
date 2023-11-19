@@ -27,10 +27,11 @@ public:
     void setEstado(bool e) { _estado = e; }
     // gets
     int getNumeroVenta() { return _nVenta; }
-    int getCodigoArt(){return _codigoArt;}
-    int getCantidad(){return _cant;}
-    int getEmpleado(){return _codigoEmpleado;}
+    int getCodigoArt() { return _codigoArt; }
+    int getCantidad() { return _cant; }
+    int getEmpleado() { return _codigoEmpleado; }
     bool getEstado() { return _estado; }
+    float getTotal() { return _total; }
     // Metodos
     int cargar()
     {
@@ -210,7 +211,7 @@ public:
         }
         kioscoX.setEstado(true);
         kioscoX.setNumeroVenta(buscarUltimoCodigo() + 1); // n de venta autoincremental
-        ///sumarle al empleado lo que gano por la venta del kiosco
+        /// sumarle al empleado lo que gano por la venta del kiosco
 
         ArchivoEmpleado archivoEmpleado;
         ArchivoStock ArchivoStock;
@@ -290,7 +291,7 @@ public:
         /// usar OBJ.cargar() para modificar los datos
         fseek(p, sizeof(Kiosco) * pos, SEEK_SET);
         fread(&kioscoX, sizeof(Kiosco), 1, p);
-        ///borrar recaudacion de Empleado
+        /// borrar recaudacion de Empleado
         ArchivoEmpleado archivoEmpleado;
         ArchivoStock ArchivoStock;
         float precioXArticulo = ArchivoStock.devolverPrecio(kioscoX.getCodigoArt());
@@ -299,7 +300,7 @@ public:
 
         kioscoX.cargar();
 
-        ///agregar la nueva recaudacion de empleado
+        /// agregar la nueva recaudacion de empleado
         precioXArticulo = ArchivoStock.devolverPrecio(kioscoX.getCodigoArt());
         recaudacion = precioXArticulo * kioscoX.getCantidad();
         archivoEmpleado.incrementarTotalRecaudado(kioscoX.getEmpleado(), recaudacion);
@@ -339,6 +340,49 @@ public:
         int escribio = fwrite(&kioscoX, sizeof(Kiosco), 1, p);
         fclose(p);
         return escribio;
+    }
+
+    bool stadistiaVentasDeKiosco()
+    {
+        FILE *p;
+        Kiosco kioscoX;
+        int cantVentas = 0;
+        float totalRecaudado = 0;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+        {
+            return false;
+        }
+        while (fread(&kioscoX, sizeof(Kiosco), 1, p) == 1)
+        {
+            if (kioscoX.getEstado() == true)
+            {
+                cantVentas++;
+                totalRecaudado += kioscoX.getTotal();
+            }
+        }
+        fclose(p);
+        // mostrar estadisticas con Recuadro
+        int x = 50, y = 1;
+        if (cantVentas == 0)
+        {
+            return false;
+        }
+        int base = 39, altura = 7;
+        textColor(1, 0);
+        dibujarRecuadro(base, altura, x - 2, 0);
+        textColor(15, 0);
+        gotoxy(x, y);
+        cout << "ESTADISTICAS DE VENTAS DE KIOSCO" << endl;
+        y += 1;
+        gotoxy(x, y + 1);
+        cout << "CANTIDAD DE VENTAS: " << cantVentas << endl;
+        gotoxy(x, y + 2);
+        cout << "TOTAL RECAUDADO: " << totalRecaudado << endl;
+        gotoxy(x, y + 3);
+        cout << "RECAUDACION PROMEDIO x VENTA: " << totalRecaudado / cantVentas << endl;
+        cout << endl;
+        return true;
     }
 };
 

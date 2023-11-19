@@ -100,6 +100,7 @@ void mostrarVentaCombustibles()
     ArchivoCargaCombustible archivo;
 
     archivo.leerRegistros();
+    archivo.estadisticaDeCargaCombustible();
 }
 
 void modificarVentaCombustible()

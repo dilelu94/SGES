@@ -366,17 +366,18 @@ public:
             }
         }
         fclose(p);
+        // mostrar estadisticas y dibujar recuadro
         int x = 50, y = 1;
-        textColor(1, 0);
         if (totalVentas == 0)
         {
-            return true;
+            return false;
         }
         int base = 39, altura = 8;
         if (cantCambioDeRueda > 999 || cantCambioDeAceite > 999 || cantInfladoDeRuedas > 999)
         {
             base = 42;
         }
+        textColor(1, 0);
         dibujarRecuadro(base, altura, x - 2, 0);
         textColor(15, 0);
         gotoxy(x, y);

@@ -216,7 +216,7 @@ public:
         }
         combustibleX.setEstado(true);
         combustibleX.setNumVenta(buscarUltimoCodigo() + 1); // n de venta autoincremental
-        ///sumarle al empleado lo que gano por la venta de combustible
+        /// sumarle al empleado lo que gano por la venta de combustible
         ArchivoEmpleado archivoEmpleado;
         ArchivoCombustible archivoCombustible;
         float precioXLitro = archivoCombustible.devolverPrecio(combustibleX.getCodigoCombustible());
@@ -304,7 +304,7 @@ public:
             {
                 fseek(p, sizeof combustibleX * contCodComb, 0);
                 fread(&combustibleX, sizeof(CargaCombustible), 1, p);
-                ///Borrar el ingreso viejo del empleado
+                /// Borrar el ingreso viejo del empleado
                 ArchivoEmpleado archivoEmpleado;
                 ArchivoCombustible archivoCombustible;
                 float precioXLitro = archivoCombustible.devolverPrecio(combustibleX.getCodigoCombustible());
@@ -313,7 +313,7 @@ public:
 
                 combustibleX.cargar();
 
-                ///Cargar el ingreso nuevo del empleado
+                /// Cargar el ingreso nuevo del empleado
                 precioXLitro = archivoCombustible.devolverPrecio(combustibleX.getCodigoCombustible());
                 float recaudacion = precioXLitro * combustibleX.getCantidadCargada();
                 archivoEmpleado.incrementarTotalRecaudado(combustibleX.getEmpleado(), recaudacion);
@@ -401,6 +401,51 @@ public:
         divisorSimpleLargo();
         textColor(15, 0);
         return -1;
+    };
+
+    bool estadisticaDeCargaCombustible()
+    {
+        FILE *p;
+        CargaCombustible combustibleX;
+        p = fopen("cargasCombustible.dat", "rb");
+        if (p == NULL)
+        {
+            return false;
+        }
+        int cantidadDeCargas = 0;
+        float cantidadDeLitros = 0;
+        while (fread(&combustibleX, sizeof(CargaCombustible), 1, p) == 1)
+        {
+            if (combustibleX.getEstado() == true)
+            {
+                cantidadDeCargas++;
+                cantidadDeLitros += combustibleX.getCantidadCargada();
+            }
+        }
+        fclose(p);
+        // mostrar estadisticas y dibujar recuadro
+        int x = 50, y = 1;
+        if (cantidadDeCargas == 0)
+        {
+            return false;
+        }
+        int base = 40, altura = 7;
+        textColor(1, 0);
+        dibujarRecuadro(base, altura, x - 2, 0);
+        textColor(15, 0);
+        gotoxy(x, y);
+        cout << "ESTADISTICAS DE CARGA DE COMBUSTIBLE" << endl;
+        y += 1;
+        gotoxy(x, y + 1);
+        cout << "CANTIDAD DE CARGAS: " << cantidadDeCargas << endl;
+        gotoxy(x, y + 2);
+        cout << "PROMEDIO DE LITROS POR CARGA: " << cantidadDeLitros / cantidadDeCargas << endl;
+        gotoxy(x, y + 3);
+        textColor(10, 0);
+        cout << "CANTIDAD DE LITROS CARGADOS: " << cantidadDeLitros << endl;
+        textColor(15, 0);
+        cout << endl;
+        return true;
     };
 };
 

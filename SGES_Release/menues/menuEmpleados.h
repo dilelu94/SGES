@@ -115,6 +115,7 @@ void mostrarEmpleados()
     ArchivoEmpleado archivo;
 
     archivo.leerRegistros();
+    archivo.estadisticaEmpleados();
 }
 
 void modificarEmpleado()
@@ -142,7 +143,7 @@ void ordenarEmpleados()
 
     cout << "1- Cargo" << endl;
     cout << "2- Apellido" << endl;
-    cout << "3- Filtrar Empleados por Sueldos" << endl;
+    cout << "3- Filtrar Empleados por Sueldo Maximo" << endl;
 
     cout << endl;
     divisorSimple();
@@ -208,14 +209,13 @@ void filtrarEmpleadosSueldos(){
 
     cargarVector(vec, tam);
 
-    cout<<"INGRESE LA CANTIDAD DE SUELDO POR LA QUE SE ORDENARA A LOS EMPLEADOS: ";
+    cout<<"INGRESE EL LIMITE DE SUELDO POR LA QUE SE ORDENARAN LOS EMPLEADOS: ";
     cin>>sueldo;
 
     mostrarVector(vec, tam, sueldo);
 
 
     delete vec;
-
 }
 
 #endif // MENUEMPLEADOS_H_INCLUDED
