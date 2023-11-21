@@ -90,7 +90,7 @@ void menuCopiasDeSeguridad()
         cout << "7- Copia de seguridad Venta de Kiosco" << endl;
         cout << "8- Copia de seguridad Clientes" << endl;
         divisorSimple();
-        cout << "0- Volver al menu principal" << endl;
+        cout << "0- Volver" << endl;
         divisorSimple();
         cout << "SELECCION: ";
         cin >> opc;
@@ -128,7 +128,6 @@ void menuCopiasDeSeguridad()
             system("pause");
             break;
         }
-        system("pause>nul");
     }
 }
 
@@ -153,7 +152,7 @@ void menuRestauracion()
         cout << "7- Restaurar archivo Venta de Kiosco" << endl;
         cout << "8- Restaurar archivo Clientes" << endl;
         divisorSimple();
-        cout << "0- Volver al menu principal" << endl;
+        cout << "0- Volver" << endl;
         divisorSimple();
         cout << "SELECCION: ";
         cin >> opc;
@@ -191,7 +190,6 @@ void menuRestauracion()
             system("pause");
             break;
         }
-        system("pause>nul");
     }
 }
 
