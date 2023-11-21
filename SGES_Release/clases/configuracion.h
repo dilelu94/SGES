@@ -18,17 +18,21 @@ public:
 
         pAux = fopen("empleados.dat", "rb");
         if (pAux == NULL)
+        {
             textColor(12, 0);
-        cout << "NO EXISTE EL ARCHIVO DE DATOS";
-        textColor(15, 0);
-        return 1;
-        ;
+            cout << "NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            return 1;
+        }
 
         p = fopen(nombre, "wb");
         if (p == NULL)
         {
+            textColor(12, 0);
+            cout << "NO SE PUDO CREAR EL ARCHIVO DE BACKUP";
+            textColor(15, 0);
             fclose(pAux);
-            exit(1);
+            return 1;
         }
         while (fread(&reg, sizeof(Empleado), 1, pAux) == 1)
         {
@@ -38,9 +42,15 @@ public:
             fwrite(&reg, sizeof reg, 1, p);
             cont++;
         }
+        system("cls");
         fclose(p);
         fclose(pAux);
-        cout << "COPIA DE SEGURIDAD CREADA";
+        textColor(10, 0);
+        divisorSimple();
+        cout << "COPIA DE SEGURIDAD CREADA" << endl;
+        divisorSimple();
+        textColor(15, 0);
+        system("pause");
         return 1;
     }
 

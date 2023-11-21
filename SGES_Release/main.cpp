@@ -37,7 +37,7 @@ int main()
         cout << "6- Seccion Stock Kiosco" << endl;
         cout << "7- Seccion Ventas de Kiosco" << endl;
         cout << "8- Seccion Clientes" << endl;
-        cout << "9- Seccion configuracion" << endl;
+        cout << "9- Seccion Configuracion" << endl;
 
         cout << endl;
         divisorSimple();

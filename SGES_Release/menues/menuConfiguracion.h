@@ -97,6 +97,7 @@ void menuCopiasDeSeguridad()
         {
         case 1:
             backupEmpleados();
+            /* system("pause"); */
             break;
         case 2:
             backupCombustibles();
