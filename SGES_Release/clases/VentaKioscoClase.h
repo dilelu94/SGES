@@ -35,6 +35,7 @@ public:
     // Metodos
     int cargar()
     {
+        int cantidadStock;
         // nVenta es autoincremental
         cout << "INGRESE CODIGO DE ARTICULO VENDIDO: " << endl;
         cin >> _codigoArt;
@@ -53,7 +54,7 @@ public:
             system("pause");
             return -1;
         }
-
+        cantidadStock=archivoStock.devolverCantidad(_codigoArt);
         cout << "INGRESE CANTIDAD: " << endl;
         cin >> _cant;
         if (_cant <= 0)
@@ -61,6 +62,15 @@ public:
             textColor(12, 0);
             divisorSimpleLargo();
             cout << "ERROR: VUELVA A INTENTAR E INGRESE UNA CANTIDAD VALIDA" << endl;
+            divisorSimpleLargo();
+            textColor(15, 0);
+            return -1;
+        }
+        if(_cant>cantidadStock){
+            textColor(12, 0);
+            divisorSimpleLargo();
+            cout << "ERROR: VUELVA A INTENTAR E INGRESE UNA CANTIDAD MENOR AL TOTAL PARA EL ARTICULO SELECCIONADO" << endl;
+            cout << "LIMITE :" << cantidadStock << endl;
             divisorSimpleLargo();
             textColor(15, 0);
             return -1;
@@ -218,6 +228,10 @@ public:
         float precioXArticulo = ArchivoStock.devolverPrecio(kioscoX.getCodigoArt());
         float recaudacion = precioXArticulo * kioscoX.getCantidad();
         archivoEmpleado.incrementarTotalRecaudado(kioscoX.getEmpleado(), recaudacion);
+
+        // Restar item vendido del stock
+
+        ArchivoStock.actualizarCantidad(kioscoX.getCodigoArt(), kioscoX.getCantidad());
 
         int escribio = fwrite(&kioscoX, sizeof(Kiosco), 1, p);
         fclose(p);

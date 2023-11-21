@@ -14,7 +14,12 @@ public:
         int cont=0;
 
         pAux=fopen("empleados.dat","rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen(nombre,"wb");
         if(p==NULL){
@@ -42,7 +47,12 @@ public:
         int cont=0;
 
         pAux=fopen(nombre,"rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE UN BACKUP";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen("empleados.dat","wb");
         if(p==NULL){
@@ -76,7 +86,12 @@ public:
         int cont=0;
 
         pAux=fopen("combustibles.dat","rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen(nombre,"wb");
         if(p==NULL){
@@ -104,7 +119,12 @@ public:
         int cont=0;
 
         pAux=fopen(nombre,"rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE UN BACKUP";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen("combustibles.dat","wb");
         if(p==NULL){
@@ -140,7 +160,12 @@ public:
         int cont=0;
 
         pAux=fopen("cargasCombustible.dat","rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen(nombre,"wb");
         if(p==NULL){
@@ -168,7 +193,12 @@ public:
         int cont=0;
 
         pAux=fopen(nombre,"rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE UN BACKUP";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen("cargasCombustible.dat","wb");
         if(p==NULL){
@@ -204,7 +234,12 @@ public:
         int cont=0;
 
         pAux=fopen("tipoDeServicios.dat","rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen(nombre,"wb");
         if(p==NULL){
@@ -232,7 +267,12 @@ public:
         int cont=0;
 
         pAux=fopen(nombre,"rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE UN BACKUP";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen("tipoDeServicios.dat","wb");
         if(p==NULL){
@@ -268,7 +308,12 @@ public:
         int cont=0;
 
         pAux=fopen("ventaDeServicio.dat","rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen(nombre,"wb");
         if(p==NULL){
@@ -296,7 +341,12 @@ public:
         int cont=0;
 
         pAux=fopen(nombre,"rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE UN BACKUP";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen("ventaDeServicio.dat","wb");
         if(p==NULL){
@@ -332,7 +382,12 @@ public:
         int cont=0;
 
         pAux=fopen("stockList.dat","rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen(nombre,"wb");
         if(p==NULL){
@@ -360,7 +415,12 @@ public:
         int cont=0;
 
         pAux=fopen(nombre,"rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE UN BACKUP";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen("stockList.dat","wb");
         if(p==NULL){
@@ -397,7 +457,12 @@ public:
         int cont=0;
 
         pAux=fopen("ventasKiosco.dat","rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen(nombre,"wb");
         if(p==NULL){
@@ -425,7 +490,12 @@ public:
         int cont=0;
 
         pAux=fopen(nombre,"rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE UN BACKUP";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen("ventasKiosco.dat","wb");
         if(p==NULL){
@@ -462,7 +532,12 @@ public:
         int cont=0;
 
         pAux=fopen("clientes.dat","rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen(nombre,"wb");
         if(p==NULL){
@@ -490,7 +565,12 @@ public:
         int cont=0;
 
         pAux=fopen(nombre,"rb");
-        if(pAux==NULL) exit(1);
+        if(pAux==NULL)
+            textColor(12, 0);
+            cout<<"NO EXISTE UN BACKUP";
+            textColor(15, 0);
+            return 1;
+        ;
 
         p=fopen("clientes.dat","wb");
         if(p==NULL){

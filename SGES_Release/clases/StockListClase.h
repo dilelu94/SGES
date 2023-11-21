@@ -6,21 +6,50 @@ class Stock;
 class Stock
 {
 private:
-    int _codigoArt;
+    int _codigoArt, _cantidad;
     char _nombreArticulo[30];
     float _precio;
     bool _estado;
 
 public:
     // sets
-    void setCodigoArt(int c) { _codigoArt = c; }
-    void setArticulo(const char *a) { strcpy(_nombreArticulo, a); }
-    void setCodigoArt(float p) { _precio = p; }
-    void setEstado(bool e) { _estado = e; }
+    void setCodigoArt(int c)
+    {
+        _codigoArt = c;
+    }
+    void setArticulo(const char *a)
+    {
+        strcpy(_nombreArticulo, a);
+    }
+    void setCodigoArt(float p)
+    {
+        _precio = p;
+    }
+    void setCantidad(int c)
+    {
+        _cantidad = c;
+    }
+    void setEstado(bool e)
+    {
+        _estado = e;
+    }
     // gets
-    int getCodigoStock() { return _codigoArt; }
-    bool getEstado() { return _estado; }
-    float getPrecio() { return _precio; }
+    int getCodigoStock()
+    {
+        return _codigoArt;
+    }
+    bool getEstado()
+    {
+        return _estado;
+    }
+    float getPrecio()
+    {
+        return _precio;
+    }
+    int getCantidad()
+    {
+        return _cantidad;
+    }
     // Metodos
     bool cargar()
     {
@@ -48,6 +77,17 @@ public:
             textColor(15, 0);
             return false;
         }
+        cout << "INGRESE LA CANTIDAD: " << endl;
+        cin >> _cantidad;
+        if (_cantidad <= 0)
+        {
+            textColor(12, 0);
+            divisorSimple();
+            cout << "LA CANTIDAD NO PUEDE SER NEGATIVO NI CERO" << endl;
+            divisorSimple();
+            textColor(15, 0);
+            return false;
+        }
         /* _estado = true; */ // ya se hace mas abajo esto con el setEstado
         return true;
     }
@@ -61,6 +101,7 @@ public:
         cout << "CODIGO DE ARTICULO: " << _codigoArt << endl;
         cout << "NOMBRE: " << _nombreArticulo << endl;
         cout << "PRECIO: " << _precio << endl;
+        cout << "CANTIDAD: " << _cantidad << endl;
         cout << endl;
         divisorSimple();
     }
@@ -217,6 +258,26 @@ public:
         return -1;
     }
 
+    int devolverCantidad(int codStock)
+    {
+        FILE *p;
+        Stock x;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+            exit(1);
+        while (fread(&x, sizeof(Stock), 1, p) == 1)
+        {
+            if (x.getCodigoStock() == codStock && x.getEstado() == true)
+            {
+                return x.getCantidad();
+                fclose(p);
+            }
+        }
+        fclose(p);
+        return -1;
+    }
+
+
     int modificarRegistro(int numeroItem)
     {
         FILE *p;
@@ -279,6 +340,46 @@ public:
         int escribio = fwrite(&stockX, sizeof(Stock), 1, p);
         fclose(p);
         return escribio;
+    }
+
+    int actualizarCantidad(int cod, int cant)
+    {
+        FILE *p;
+        int pos = buscarPosicion(cod);
+        Stock stockX;
+        if (pos == -1)
+        {
+            return -1;
+        }
+        p = fopen(nombre, "rb+");
+        if (p == NULL)
+        {
+            return -1;
+        }
+
+        fseek(p, sizeof(Stock) * pos, SEEK_SET);
+        fread(&stockX, sizeof(Stock), 1, p);
+
+
+        ///cambiamos el valor del registro
+        stockX.setCantidad(stockX.getCantidad()-cant);
+
+        fseek(p, sizeof(Stock) * pos, SEEK_SET);
+        int escribio = fwrite(&stockX, sizeof(Stock), 1, p);
+        fclose(p);
+        if (escribio == 1)
+        {
+            textColor(10, 0);
+            divisorSimple();
+            cout << "SE MODIFICO EL REGISTRO EXITOSAMENTE :)" << endl;
+            divisorSimple();
+            textColor(15, 0);
+        }
+        return escribio;
+
+
+
+
     }
 };
 

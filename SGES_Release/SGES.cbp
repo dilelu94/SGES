@@ -32,24 +32,25 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="CargaCombustibleClase.h" />
-		<Unit filename="CombustibleClase.h" />
-		<Unit filename="EmpleadoClase.h" />
-		<Unit filename="TipoServicioClase.h" />
-		<Unit filename="VentaServicioClase.h" />
+		<Unit filename="clases/CargaCombustibleClase.h" />
+		<Unit filename="clases/ClienteClase.h" />
+		<Unit filename="clases/CombustibleClase.h" />
 		<Unit filename="clases/EmpleadoClase.h" />
-		<Unit filename="clases/PedidoInsumoClase.h" />
 		<Unit filename="clases/StockListClase.h" />
+		<Unit filename="clases/TipoServicioClase.h" />
 		<Unit filename="clases/VentaKioscoClase.h" />
+		<Unit filename="clases/VentaServicioClase.h" />
+		<Unit filename="clases/configuracion.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="menuCargaCombustible.h" />
-		<Unit filename="menuCombustible.h" />
-		<Unit filename="menuEmpleados.h" />
-		<Unit filename="menuTipoServicios.h" />
-		<Unit filename="menuVentaServicios.h" />
-		<Unit filename="menues/menuPedidoInsumos.h" />
+		<Unit filename="menues/menuCargaCombustible.h" />
+		<Unit filename="menues/menuClientes.h" />
+		<Unit filename="menues/menuCombustible.h" />
+		<Unit filename="menues/menuConfiguracion.h" />
+		<Unit filename="menues/menuEmpleados.h" />
 		<Unit filename="menues/menuStockList.h" />
+		<Unit filename="menues/menuTipoServicios.h" />
 		<Unit filename="menues/menuVentaKiosco.h" />
+		<Unit filename="menues/menuVentaServicios.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

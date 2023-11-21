@@ -3,8 +3,6 @@
 
 class CargaCombustible;
 
-bool existeEmpleado(int);    // estos ya no se usan
-bool existeCombustible(int); // estos ya no se usan
 
 class CargaCombustible
 {
@@ -31,6 +29,7 @@ public:
     // metodos
     bool cargar()
     {
+        float cantidadStockNafta;
         // nVenta es autoincremental
         cout << "INGRESE EL CODIGO DE COMBUSTIBLE: " << endl;
         cin >> _codigoCombustible;
@@ -68,6 +67,7 @@ public:
             return false;
             break;
         }
+        cantidadStockNafta=archivoCombustible.devolverCantidad(_codigoCombustible);
         cout << "INGRESE CANTIDAD DE LITROS CARGADA: " << endl;
         cin >> _cantidadCargada;
         if (_cantidadCargada <= 0)
@@ -77,6 +77,15 @@ public:
             divisorSimple();
             cout << "CANTIDAD INCORRECTA" << endl;
             divisorSimple();
+            textColor(15, 0);
+            return false;
+        }
+        if(_cantidadCargada>cantidadStockNafta){
+            textColor(12, 0);
+            divisorSimpleLargo();
+            cout << "ERROR: VUELVA A INTENTAR E INGRESE UNA CANTIDAD MENOR AL TOTAL PARA EL TIPO DE NAFTA" << endl;
+            cout << "LIMITE :" << cantidadStockNafta << endl;
+            divisorSimpleLargo();
             textColor(15, 0);
             return false;
         }
@@ -222,6 +231,11 @@ public:
         float precioXLitro = archivoCombustible.devolverPrecio(combustibleX.getCodigoCombustible());
         float recaudacion = precioXLitro * combustibleX.getCantidadCargada();
         archivoEmpleado.incrementarTotalRecaudado(combustibleX.getEmpleado(), recaudacion);
+
+        // Restar item vendido del stock de combustibles
+
+        archivoCombustible.actualizarCantidad(combustibleX.getCodigoCombustible(), combustibleX.getCantidadCargada());
+
         int escribio = fwrite(&combustibleX, sizeof(CargaCombustible), 1, p);
         fclose(p);
         if (escribio == 1)
@@ -449,36 +463,6 @@ public:
     };
 };
 
-bool existeEmpleado(int empleado)
-{
-    ArchivoEmpleado archi;
-    bool x;
 
-    x = archi.existeEmpleado(empleado);
-    if (x == true)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-bool existeCombustible(int combustible)
-{
-    ArchivoCombustible archi;
-    bool x;
-
-    x = archi.existeCombustible(combustible);
-    if (x == true)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
 
 #endif // CARGACOMBUSTIBLECLASE_H_INCLUDED

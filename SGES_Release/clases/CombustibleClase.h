@@ -10,6 +10,7 @@ private:
     int _tipoCombustible;
     float _precio;
     int _calidad;
+    float _litros;
     bool _estado; // el estado se tiene que actualizar en el guardado del archivo o pasan cosas feas
 
 public:
@@ -18,12 +19,14 @@ public:
     void setTipoCombustible(int t) { _tipoCombustible = t; }
     void setPrecio(float p) { _precio = p; }
     void setCalidad(int c) { _calidad = c; }
+    void setCantidadLitros(float l){_litros=l;}
     void setEstado(bool e) { _estado = e; }
     // gets
     int getCodigoCombustible() { return _codigoCombustible; }
     int getTipoCombustible() { return _tipoCombustible; }
     float getPrecio() { return _precio; }
     int getCalidad() { return _calidad; }
+    float getLitros(){ return _litros;}
     bool getEstado() { return _estado; }
     // Metodos
     bool cargar()
@@ -79,6 +82,9 @@ public:
             return 0;
             break;
         }
+        cout << "CANTIDAD LITROS: " << endl;
+        cin >> _litros;
+
         return 1;
     }
     void mostrar()
@@ -118,6 +124,7 @@ public:
             cout << "Normal" << endl;
         }
 
+        cout << "CANTIDAD: " << _litros << endl;
         cout << endl;
         divisorSimple();
     }
@@ -372,7 +379,62 @@ public:
         fclose(p);
         return -1;
     }
-    
+
+    int devolverCantidad(int codNafta)
+    {
+        FILE *p;
+        Combustible x;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+            exit(1);
+        while (fread(&x, sizeof(Combustible), 1, p) == 1)
+        {
+            if (x.getCodigoCombustible() == codNafta && x.getEstado() == true)
+            {
+                return x.getLitros();
+                fclose(p);
+            }
+        }
+        fclose(p);
+        return -1;
+    }
+
+    int actualizarCantidad(int cod, float cant)
+    {
+        FILE *p;
+        int pos = buscarPosicion(cod);
+        Combustible CombustibleX;
+        if (pos == -1)
+        {
+            return -1;
+        }
+        p = fopen(nombre, "rb+");
+        if (p == NULL)
+        {
+            return -1;
+        }
+
+        fseek(p, sizeof(Combustible) * pos, SEEK_SET);
+        fread(&CombustibleX, sizeof(Combustible), 1, p);
+
+
+        ///cambiamos el valor del registro
+        CombustibleX.setCantidadLitros(CombustibleX.getLitros()-cant);
+
+        fseek(p, sizeof(Combustible) * pos, SEEK_SET);
+        int escribio = fwrite(&CombustibleX, sizeof(Combustible), 1, p);
+        fclose(p);
+        if (escribio == 1)
+        {
+            textColor(10, 0);
+            divisorSimple();
+            cout << "SE MODIFICO EL REGISTRO EXITOSAMENTE :)" << endl;
+            divisorSimple();
+            textColor(15, 0);
+        }
+        return escribio;
+    }
+
 };
 
 #endif // COMBUSTIBLECLASE_H_INCLUDED
