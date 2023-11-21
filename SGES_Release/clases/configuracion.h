@@ -217,7 +217,7 @@ private:
 public:
     ConfiguracionCargaCombustible(const char *n) { strcpy(nombre, n); }
 
-    int backupCargaCombustible()
+    void backupCargaCombustible()
     {
         CargaCombustible reg;
         FILE *p;
@@ -226,17 +226,23 @@ public:
 
         pAux = fopen("cargasCombustible.dat", "rb");
         if (pAux == NULL)
+        {
             textColor(12, 0);
-        cout << "NO EXISTE EL ARCHIVO DE DATOS";
-        textColor(15, 0);
-        return 1;
-        ;
+            cout << "NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            system("pause");
+            return;
+        }
 
         p = fopen(nombre, "wb");
         if (p == NULL)
         {
+            textColor(12, 0);
+            cout << "NO SE PUDO CREAR EL ARCHIVO DE BACKUP";
+            textColor(15, 0);
             fclose(pAux);
-            exit(1);
+            system("pause");
+            return;
         }
         while (fread(&reg, sizeof(CargaCombustible), 1, pAux) == 1)
         {
@@ -248,11 +254,17 @@ public:
         }
         fclose(p);
         fclose(pAux);
-        cout << "COPIA DE SEGURIDAD CREADA";
-        return 1;
+        system("cls");
+        textColor(10, 0);
+        divisorSimple();
+        cout << "COPIA DE SEGURIDAD CREADA" << endl;
+        divisorSimple();
+        textColor(15, 0);
+        system("pause");
+        return;
     }
 
-    int restaurarCargaCombustibles()
+    void restaurarCargaCombustibles()
     {
         CargaCombustible reg;
         FILE *p;
@@ -261,17 +273,23 @@ public:
 
         pAux = fopen(nombre, "rb");
         if (pAux == NULL)
+        {
             textColor(12, 0);
-        cout << "NO EXISTE UN BACKUP";
-        textColor(15, 0);
-        return 1;
-        ;
+            cout << "NO EXISTE UN BACKUP";
+            textColor(15, 0);
+            system("pause");
+            return;
+        }
 
         p = fopen("cargasCombustible.dat", "wb");
         if (p == NULL)
         {
+            textColor(12, 0);
+            cout << "NO SE PUDO CREAR EL ARCHIVO DE DATOS";
+            textColor(15, 0);
             fclose(pAux);
-            exit(1);
+            system("pause");
+            return;
         }
         while (fread(&reg, sizeof(CargaCombustible), 1, pAux) == 1)
         {
@@ -283,8 +301,14 @@ public:
         }
         fclose(p);
         fclose(pAux);
-        cout << "RESTAURACION DE ARCHIVO COMPLETA";
-        return 1;
+        system("cls");
+        textColor(10, 0);
+        divisorSimple();
+        cout << "RESTAURACION DE ARCHIVO COMPLETA" << endl;
+        divisorSimple();
+        textColor(15, 0);
+        system("pause");
+        return;
     }
 };
 
@@ -298,7 +322,7 @@ private:
 public:
     ConfiguracionTipoServicio(const char *n) { strcpy(nombre, n); }
 
-    int backupTipoServicio()
+    void backupTipoServicio()
     {
         TipoDeServicio reg;
         FILE *p;
@@ -307,17 +331,23 @@ public:
 
         pAux = fopen("tipoDeServicios.dat", "rb");
         if (pAux == NULL)
+        {
             textColor(12, 0);
-        cout << "NO EXISTE EL ARCHIVO DE DATOS";
-        textColor(15, 0);
-        return 1;
-        ;
+            cout << "NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            system("pause");
+            return;
+        }
 
         p = fopen(nombre, "wb");
         if (p == NULL)
         {
+            textColor(12, 0);
+            cout << "NO SE PUDO CREAR EL ARCHIVO DE BACKUP";
+            textColor(15, 0);
             fclose(pAux);
-            exit(1);
+            system("pause");
+            return;
         }
         while (fread(&reg, sizeof(TipoDeServicio), 1, pAux) == 1)
         {
@@ -329,11 +359,17 @@ public:
         }
         fclose(p);
         fclose(pAux);
-        cout << "COPIA DE SEGURIDAD CREADA";
-        return 1;
+        system("cls");
+        textColor(10, 0);
+        divisorSimple();
+        cout << "COPIA DE SEGURIDAD CREADA" << endl;
+        divisorSimple();
+        textColor(15, 0);
+        system("pause");
+        return;
     }
 
-    int restaurarTipoServicio()
+    void restaurarTipoServicio()
     {
         TipoDeServicio reg;
         FILE *p;
@@ -342,17 +378,23 @@ public:
 
         pAux = fopen(nombre, "rb");
         if (pAux == NULL)
+        {
             textColor(12, 0);
-        cout << "NO EXISTE UN BACKUP";
-        textColor(15, 0);
-        return 1;
-        ;
+            cout << "NO EXISTE UN BACKUP";
+            textColor(15, 0);
+            system("pause");
+            return;
+        }
 
         p = fopen("tipoDeServicios.dat", "wb");
         if (p == NULL)
         {
+            textColor(12, 0);
+            cout << "NO SE PUDO CREAR EL ARCHIVO DE DATOS";
+            textColor(15, 0);
             fclose(pAux);
-            exit(1);
+            system("pause");
+            return;
         }
         while (fread(&reg, sizeof(TipoDeServicio), 1, pAux) == 1)
         {
@@ -364,8 +406,14 @@ public:
         }
         fclose(p);
         fclose(pAux);
-        cout << "RESTAURACION DE ARCHIVO COMPLETA";
-        return 1;
+        system("cls");
+        textColor(10, 0);
+        divisorSimple();
+        cout << "RESTAURACION DE ARCHIVO COMPLETA" << endl;
+        divisorSimple();
+        textColor(15, 0);
+        system("pause");
+        return;
     }
 };
 
@@ -379,26 +427,32 @@ private:
 public:
     ConfiguracionVentaServicio(const char *n) { strcpy(nombre, n); }
 
-    int backupVentaDeServicio()
+    void backupVentaDeServicio()
     {
         VentaServicio reg;
         FILE *p;
         FILE *pAux;
         int cont = 0;
 
-        pAux = fopen("ventaDeServicio.dat", "rb");
+        pAux = fopen("ventasDeServicio.dat", "rb");
         if (pAux == NULL)
+        {
             textColor(12, 0);
-        cout << "NO EXISTE EL ARCHIVO DE DATOS";
-        textColor(15, 0);
-        return 1;
-        ;
+            cout << "NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            system("pause");
+            return;
+        }
 
         p = fopen(nombre, "wb");
         if (p == NULL)
         {
+            textColor(12, 0);
+            cout << "NO SE PUDO CREAR EL ARCHIVO DE BACKUP";
+            textColor(15, 0);
             fclose(pAux);
-            exit(1);
+            system("pause");
+            return;
         }
         while (fread(&reg, sizeof(VentaServicio), 1, pAux) == 1)
         {
@@ -410,11 +464,17 @@ public:
         }
         fclose(p);
         fclose(pAux);
-        cout << "COPIA DE SEGURIDAD CREADA";
-        return 1;
+        system("cls");
+        textColor(10, 0);
+        divisorSimple();
+        cout << "COPIA DE SEGURIDAD CREADA" << endl;
+        divisorSimple();
+        textColor(15, 0);
+        system("pause");
+        return;
     }
 
-    int restaurarVentaDeServicio()
+    void restaurarVentaDeServicio()
     {
         VentaServicio reg;
         FILE *p;
@@ -423,17 +483,23 @@ public:
 
         pAux = fopen(nombre, "rb");
         if (pAux == NULL)
+        {
             textColor(12, 0);
-        cout << "NO EXISTE UN BACKUP";
-        textColor(15, 0);
-        return 1;
-        ;
+            cout << "NO EXISTE UN BACKUP";
+            textColor(15, 0);
+            system("pause");
+            return;
+        }
 
-        p = fopen("ventaDeServicio.dat", "wb");
+        p = fopen("ventasDeServicio.dat", "wb");
         if (p == NULL)
         {
+            textColor(12, 0);
+            cout << "NO SE PUDO CREAR EL ARCHIVO DE DATOS";
+            textColor(15, 0);
             fclose(pAux);
-            exit(1);
+            system("pause");
+            return;
         }
         while (fread(&reg, sizeof(VentaServicio), 1, pAux) == 1)
         {
@@ -445,8 +511,14 @@ public:
         }
         fclose(p);
         fclose(pAux);
-        cout << "RESTAURACION DE ARCHIVO COMPLETA";
-        return 1;
+        system("cls");
+        textColor(10, 0);
+        divisorSimple();
+        cout << "RESTAURACION DE ARCHIVO COMPLETA" << endl;
+        divisorSimple();
+        textColor(15, 0);
+        system("pause");
+        return;
     }
 };
 
@@ -460,7 +532,7 @@ private:
 public:
     ConfiguracionStock(const char *n) { strcpy(nombre, n); }
 
-    int backupStock()
+    void backupStock()
     {
         Stock reg;
         FILE *p;
@@ -469,17 +541,21 @@ public:
 
         pAux = fopen("stockList.dat", "rb");
         if (pAux == NULL)
+        {
             textColor(12, 0);
-        cout << "NO EXISTE EL ARCHIVO DE DATOS";
-        textColor(15, 0);
-        return 1;
-        ;
+            cout << "NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            return;
+        }
 
         p = fopen(nombre, "wb");
         if (p == NULL)
         {
+            textColor(12, 0);
+            cout << "NO SE PUDO CREAR EL ARCHIVO DE BACKUP";
+            textColor(15, 0);
             fclose(pAux);
-            exit(1);
+            return;
         }
         while (fread(&reg, sizeof(Stock), 1, pAux) == 1)
         {
@@ -491,11 +567,17 @@ public:
         }
         fclose(p);
         fclose(pAux);
-        cout << "COPIA DE SEGURIDAD CREADA";
-        return 1;
+        system("cls");
+        textColor(10, 0);
+        divisorSimple();
+        cout << "COPIA DE SEGURIDAD CREADA" << endl;
+        divisorSimple();
+        textColor(15, 0);
+        system("pause");
+        return;
     }
 
-    int restaurarStock()
+    void restaurarStock()
     {
         Stock reg;
         FILE *p;
@@ -504,17 +586,21 @@ public:
 
         pAux = fopen(nombre, "rb");
         if (pAux == NULL)
+        {
             textColor(12, 0);
-        cout << "NO EXISTE UN BACKUP";
-        textColor(15, 0);
-        return 1;
-        ;
+            cout << "NO EXISTE UN BACKUP";
+            textColor(15, 0);
+            return;
+        }
 
         p = fopen("stockList.dat", "wb");
         if (p == NULL)
         {
+            textColor(12, 0);
+            cout << "NO SE PUDO CREAR EL ARCHIVO DE DATOS";
+            textColor(15, 0);
             fclose(pAux);
-            exit(1);
+            return;
         }
         while (fread(&reg, sizeof(Stock), 1, pAux) == 1)
         {
@@ -526,8 +612,14 @@ public:
         }
         fclose(p);
         fclose(pAux);
-        cout << "RESTAURACION DE ARCHIVO COMPLETA";
-        return 1;
+        system("cls");
+        textColor(10, 0);
+        divisorSimple();
+        cout << "RESTAURACION DE ARCHIVO COMPLETA" << endl;
+        divisorSimple();
+        textColor(15, 0);
+        system("pause");
+        return;
     }
 };
 
@@ -541,7 +633,7 @@ private:
 public:
     ConfiguracionVentaKiosco(const char *n) { strcpy(nombre, n); }
 
-    int backupVentaKiosco()
+    void backupVentaKiosco()
     {
         Kiosco reg;
         FILE *p;
@@ -550,17 +642,21 @@ public:
 
         pAux = fopen("ventasKiosco.dat", "rb");
         if (pAux == NULL)
+        {
             textColor(12, 0);
-        cout << "NO EXISTE EL ARCHIVO DE DATOS";
-        textColor(15, 0);
-        return 1;
-        ;
+            cout << "NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            return;
+        }
 
         p = fopen(nombre, "wb");
         if (p == NULL)
         {
+            textColor(12, 0);
+            cout << "NO SE PUDO CREAR EL ARCHIVO DE BACKUP";
+            textColor(15, 0);
             fclose(pAux);
-            exit(1);
+            return;
         }
         while (fread(&reg, sizeof(Kiosco), 1, pAux) == 1)
         {
@@ -572,11 +668,17 @@ public:
         }
         fclose(p);
         fclose(pAux);
-        cout << "COPIA DE SEGURIDAD CREADA";
-        return 1;
+        system("cls");
+        textColor(10, 0);
+        divisorSimple();
+        cout << "COPIA DE SEGURIDAD CREADA" << endl;
+        divisorSimple();
+        textColor(15, 0);
+        system("pause");
+        return;
     }
 
-    int restaurarVentaKiosco()
+    void restaurarVentaKiosco()
     {
         Kiosco reg;
         FILE *p;
@@ -585,16 +687,21 @@ public:
 
         pAux = fopen(nombre, "rb");
         if (pAux == NULL)
+        {
             textColor(12, 0);
-        cout << "NO EXISTE UN BACKUP";
-        textColor(15, 0);
-        return 1;
+            cout << "NO EXISTE UN BACKUP";
+            textColor(15, 0);
+            return;
+        }
 
         p = fopen("ventasKiosco.dat", "wb");
         if (p == NULL)
         {
+            textColor(12, 0);
+            cout << "NO SE PUDO CREAR EL ARCHIVO DE DATOS";
+            textColor(15, 0);
             fclose(pAux);
-            exit(1);
+            return;
         }
         while (fread(&reg, sizeof(Kiosco), 1, pAux) == 1)
         {
@@ -606,8 +713,14 @@ public:
         }
         fclose(p);
         fclose(pAux);
-        cout << "RESTAURACION DE ARCHIVO COMPLETA";
-        return 1;
+        system("cls");
+        textColor(10, 0);
+        divisorSimple();
+        cout << "RESTAURACION DE ARCHIVO COMPLETA" << endl;
+        divisorSimple();
+        textColor(15, 0);
+        system("pause");
+        return;
     }
 };
 
@@ -621,7 +734,7 @@ private:
 public:
     ConfiguracionClientes(const char *n) { strcpy(nombre, n); }
 
-    int backupClientes()
+    void backupClientes()
     {
         Cliente reg;
         FILE *p;
@@ -630,17 +743,21 @@ public:
 
         pAux = fopen("clientes.dat", "rb");
         if (pAux == NULL)
+        {
             textColor(12, 0);
-        cout << "NO EXISTE EL ARCHIVO DE DATOS";
-        textColor(15, 0);
-        return 1;
-        ;
+            cout << "NO EXISTE EL ARCHIVO DE DATOS";
+            textColor(15, 0);
+            return;
+        }
 
         p = fopen(nombre, "wb");
         if (p == NULL)
         {
+            textColor(12, 0);
+            cout << "NO SE PUDO CREAR EL ARCHIVO DE BACKUP";
+            textColor(15, 0);
             fclose(pAux);
-            exit(1);
+            return;
         }
         while (fread(&reg, sizeof(Cliente), 1, pAux) == 1)
         {
@@ -652,11 +769,17 @@ public:
         }
         fclose(p);
         fclose(pAux);
-        cout << "COPIA DE SEGURIDAD CREADA";
-        return 1;
+        system("cls");
+        textColor(10, 0);
+        divisorSimple();
+        cout << "COPIA DE SEGURIDAD CREADA" << endl;
+        divisorSimple();
+        textColor(15, 0);
+        system("pause");
+        return;
     }
 
-    int restaurarClientes()
+    void restaurarClientes()
     {
         Cliente reg;
         FILE *p;
@@ -665,17 +788,21 @@ public:
 
         pAux = fopen(nombre, "rb");
         if (pAux == NULL)
+        {
             textColor(12, 0);
-        cout << "NO EXISTE UN BACKUP";
-        textColor(15, 0);
-        return 1;
-        ;
+            cout << "NO EXISTE UN BACKUP";
+            textColor(15, 0);
+            return;
+        }
 
         p = fopen("clientes.dat", "wb");
         if (p == NULL)
         {
+            textColor(12, 0);
+            cout << "NO SE PUDO CREAR EL ARCHIVO DE DATOS";
+            textColor(15, 0);
             fclose(pAux);
-            exit(1);
+            return;
         }
         while (fread(&reg, sizeof(Cliente), 1, pAux) == 1)
         {
@@ -687,8 +814,14 @@ public:
         }
         fclose(p);
         fclose(pAux);
-        cout << "RESTAURACION DE ARCHIVO COMPLETA";
-        return 1;
+        system("cls");
+        textColor(10, 0);
+        divisorSimple();
+        cout << "RESTAURACION DE ARCHIVO COMPLETA" << endl;
+        divisorSimple();
+        textColor(15, 0);
+        system("pause");
+        return;
     }
 };
 
