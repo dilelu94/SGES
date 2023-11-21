@@ -28,7 +28,7 @@ int main()
 
         cout << "MENU PRINCIPAL" << endl;
         cout << endl;
-        
+
         cout << "1- Seccion Empleados" << endl;
         cout << "2- Seccion Combustibles" << endl;
         cout << "3- Seccion Cargas de Combustible" << endl;

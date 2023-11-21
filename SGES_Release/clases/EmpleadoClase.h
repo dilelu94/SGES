@@ -203,6 +203,28 @@ public:
         return false;
     }
 
+    bool esPlayero(int codEmp)
+    {
+        FILE *p;
+        Empleado empleadoX;
+        p = fopen(nombre, "rb");
+        if (p == NULL)
+            exit(1);
+        while (fread(&empleadoX, sizeof(Empleado), 1, p) == 1)
+        {
+            if (empleadoX.getCodigoEmp() == codEmp && empleadoX.getEstado() == true)
+            {
+                if (strcmp(empleadoX.getCargo(), "Playero") == 0)
+                {
+                    fclose(p);
+                    return true;
+                }
+            }
+        }
+        fclose(p);
+        return false;
+    }
+
     int agregarRegistro(Empleado empleadoX)
     {
         FILE *p;
@@ -423,12 +445,13 @@ public:
                 if (primerEmpleadoLeido == false)
                 {
                     menorRecaudacion = empleadoX.getTotalRecaudado();
+                    codigoEmpleadoConMenorRecaudacion = empleadoX.getCodigoEmp();
                     primerEmpleadoLeido = true;
                 }
                 cantidadDeEmpleados++;
-                totalRecaudado += empleadoX.getTotalRecaudado();
                 promedioEdades += empleadoX.getEdad();
                 promedioSueldos += empleadoX.getSueldo();
+                totalRecaudado += empleadoX.getTotalRecaudado();
                 if (empleadoX.getTotalRecaudado() > mayorRecaudacion)
                 {
                     mayorRecaudacion = empleadoX.getTotalRecaudado();
@@ -439,6 +462,7 @@ public:
                     menorRecaudacion = empleadoX.getTotalRecaudado();
                     codigoEmpleadoConMenorRecaudacion = empleadoX.getCodigoEmp();
                 }
+
             }
         }
         fclose(p);

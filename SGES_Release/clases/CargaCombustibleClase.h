@@ -3,7 +3,6 @@
 
 class CargaCombustible;
 
-
 class CargaCombustible
 {
 private:
@@ -67,7 +66,7 @@ public:
             return false;
             break;
         }
-        cantidadStockNafta=archivoCombustible.devolverCantidad(_codigoCombustible);
+        cantidadStockNafta = archivoCombustible.devolverCantidad(_codigoCombustible);
         cout << "INGRESE CANTIDAD DE LITROS CARGADA: " << endl;
         cin >> _cantidadCargada;
         if (_cantidadCargada <= 0)
@@ -80,7 +79,8 @@ public:
             textColor(15, 0);
             return false;
         }
-        if(_cantidadCargada>cantidadStockNafta){
+        if (_cantidadCargada > cantidadStockNafta)
+        {
             textColor(12, 0);
             divisorSimpleLargo();
             cout << "ERROR: VUELVA A INTENTAR E INGRESE UNA CANTIDAD MENOR AL TOTAL PARA EL TIPO DE NAFTA" << endl;
@@ -114,9 +114,20 @@ public:
             textColor(15, 0);
             return false;
         }
+        if (archivoEmpleado.esPlayero(_empleado) == false)
+        {
+            system("cls");
+            textColor(12, 0);
+            divisorSimpleLargo();
+            cout << "EL EMPLEADO NO ES PLAYERO, VUELVA A INTENTAR." << endl;
+            divisorSimpleLargo();
+            textColor(15, 0);
+            return false;
+        }
         _estado = true;
         return true;
     }
+    
     void mostrar()
     {
         if (_estado == false)
@@ -462,7 +473,5 @@ public:
         return true;
     };
 };
-
-
 
 #endif // CARGACOMBUSTIBLECLASE_H_INCLUDED
