@@ -38,7 +38,7 @@ void menuConfiguracion()
         system("cls");
         textColor(14, 0);
         divisorDoble();
-        cout << "    MENU TIPOS DE CONFIGURACION" << endl;
+        cout << "      MENU TIPOS DE CONFIGURACION" << endl;
         divisorDoble();
         textColor(15, 0);
         cout << endl;
@@ -65,7 +65,6 @@ void menuConfiguracion()
             system("pause");
             break;
         }
-        system("pause>nul");
     }
 }
 
