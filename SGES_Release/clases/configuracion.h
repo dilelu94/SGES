@@ -1,597 +1,647 @@
 #ifndef CONFIGURACION_H_INCLUDED
 #define CONFIGURACION_H_INCLUDED
 
-class ConfiguracionEmpleados{
+class ConfiguracionEmpleados
+{
 private:
     char nombre[30];
-public:
-    ConfiguracionEmpleados(const char *n){strcpy(nombre,n);}
 
-    int backupEmpleados(){
+public:
+    ConfiguracionEmpleados(const char *n) { strcpy(nombre, n); }
+
+    int backupEmpleados()
+    {
         Empleado reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen("empleados.dat","rb");
-        if(pAux==NULL)
+        pAux = fopen("empleados.dat", "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE EL ARCHIVO DE DATOS";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen(nombre,"wb");
-        if(p==NULL){
+        p = fopen(nombre, "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(Empleado),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(Empleado), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(Empleado), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(Empleado), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"COPIA DE SEGURIDAD CREADA";
+        cout << "COPIA DE SEGURIDAD CREADA";
         return 1;
     }
 
-
-    int restaurarEmpleados(){
+    int restaurarEmpleados()
+    {
         Empleado reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen(nombre,"rb");
-        if(pAux==NULL)
+        pAux = fopen(nombre, "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE UN BACKUP";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE UN BACKUP";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen("empleados.dat","wb");
-        if(p==NULL){
+        p = fopen("empleados.dat", "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(Empleado),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(Empleado), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(Empleado), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(Empleado), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"RESTAURACION DE ARCHIVO COMPLETA";
+        cout << "RESTAURACION DE ARCHIVO COMPLETA";
         return 1;
     }
 };
-///Separador-------------------
-class ConfiguracionCombustible{
+/// Separador-------------------
+class ConfiguracionCombustible
+{
 private:
     char nombre[30];
-public:
-    ConfiguracionCombustible(const char *n){strcpy(nombre,n);}
 
-    int backupCombustible(){
+public:
+    ConfiguracionCombustible(const char *n) { strcpy(nombre, n); }
+
+    int backupCombustible()
+    {
         Combustible reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen("combustibles.dat","rb");
-        if(pAux==NULL)
+        pAux = fopen("combustibles.dat", "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE EL ARCHIVO DE DATOS";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen(nombre,"wb");
-        if(p==NULL){
+        p = fopen(nombre, "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(Combustible),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(Combustible), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(Combustible), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(Combustible), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"COPIA DE SEGURIDAD CREADA";
+        cout << "COPIA DE SEGURIDAD CREADA";
         return 1;
     }
 
-
-    int restaurarCombustibles(){
+    int restaurarCombustibles()
+    {
         Combustible reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen(nombre,"rb");
-        if(pAux==NULL)
+        pAux = fopen(nombre, "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE UN BACKUP";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE UN BACKUP";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen("combustibles.dat","wb");
-        if(p==NULL){
+        p = fopen("combustibles.dat", "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(Combustible),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(Combustible), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(Combustible), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(Combustible), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"RESTAURACION DE ARCHIVO COMPLETA";
+        cout << "RESTAURACION DE ARCHIVO COMPLETA";
         return 1;
     }
 };
 
-///Separador-------------------
+/// Separador-------------------
 
-class ConfiguracionCargaCombustible{
+class ConfiguracionCargaCombustible
+{
 private:
     char nombre[30];
-public:
-    ConfiguracionCargaCombustible(const char *n){strcpy(nombre,n);}
 
-    int backupCargaCombustible(){
+public:
+    ConfiguracionCargaCombustible(const char *n) { strcpy(nombre, n); }
+
+    int backupCargaCombustible()
+    {
         CargaCombustible reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen("cargasCombustible.dat","rb");
-        if(pAux==NULL)
+        pAux = fopen("cargasCombustible.dat", "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE EL ARCHIVO DE DATOS";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen(nombre,"wb");
-        if(p==NULL){
+        p = fopen(nombre, "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(CargaCombustible),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(CargaCombustible), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(CargaCombustible), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(CargaCombustible), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"COPIA DE SEGURIDAD CREADA";
+        cout << "COPIA DE SEGURIDAD CREADA";
         return 1;
     }
 
-
-    int restaurarCargaCombustibles(){
+    int restaurarCargaCombustibles()
+    {
         CargaCombustible reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen(nombre,"rb");
-        if(pAux==NULL)
+        pAux = fopen(nombre, "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE UN BACKUP";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE UN BACKUP";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen("cargasCombustible.dat","wb");
-        if(p==NULL){
+        p = fopen("cargasCombustible.dat", "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(CargaCombustible),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(CargaCombustible), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(CargaCombustible), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(CargaCombustible), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"RESTAURACION DE ARCHIVO COMPLETA";
+        cout << "RESTAURACION DE ARCHIVO COMPLETA";
         return 1;
     }
 };
 
-///Separados-----------------------
+/// Separados-----------------------
 
-class ConfiguracionTipoServicio{
+class ConfiguracionTipoServicio
+{
 private:
     char nombre[30];
-public:
-    ConfiguracionTipoServicio(const char *n){strcpy(nombre,n);}
 
-    int backupTipoServicio(){
+public:
+    ConfiguracionTipoServicio(const char *n) { strcpy(nombre, n); }
+
+    int backupTipoServicio()
+    {
         TipoDeServicio reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen("tipoDeServicios.dat","rb");
-        if(pAux==NULL)
+        pAux = fopen("tipoDeServicios.dat", "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE EL ARCHIVO DE DATOS";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen(nombre,"wb");
-        if(p==NULL){
+        p = fopen(nombre, "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(TipoDeServicio),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(TipoDeServicio), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(TipoDeServicio), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(TipoDeServicio), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"COPIA DE SEGURIDAD CREADA";
+        cout << "COPIA DE SEGURIDAD CREADA";
         return 1;
     }
 
-
-    int restaurarTipoServicio(){
+    int restaurarTipoServicio()
+    {
         TipoDeServicio reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen(nombre,"rb");
-        if(pAux==NULL)
+        pAux = fopen(nombre, "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE UN BACKUP";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE UN BACKUP";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen("tipoDeServicios.dat","wb");
-        if(p==NULL){
+        p = fopen("tipoDeServicios.dat", "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(TipoDeServicio),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(TipoDeServicio), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(TipoDeServicio), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(TipoDeServicio), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"RESTAURACION DE ARCHIVO COMPLETA";
+        cout << "RESTAURACION DE ARCHIVO COMPLETA";
         return 1;
     }
 };
 
-///Separados-----------------------
+/// Separados-----------------------
 
-class ConfiguracionVentaServicio{
+class ConfiguracionVentaServicio
+{
 private:
     char nombre[30];
-public:
-    ConfiguracionVentaServicio(const char *n){strcpy(nombre,n);}
 
-    int backupVentaDeServicio(){
+public:
+    ConfiguracionVentaServicio(const char *n) { strcpy(nombre, n); }
+
+    int backupVentaDeServicio()
+    {
         VentaServicio reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen("ventaDeServicio.dat","rb");
-        if(pAux==NULL)
+        pAux = fopen("ventaDeServicio.dat", "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE EL ARCHIVO DE DATOS";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen(nombre,"wb");
-        if(p==NULL){
+        p = fopen(nombre, "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(VentaServicio),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(VentaServicio), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(VentaServicio), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(VentaServicio), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"COPIA DE SEGURIDAD CREADA";
+        cout << "COPIA DE SEGURIDAD CREADA";
         return 1;
     }
 
-
-    int restaurarVentaDeServicio(){
+    int restaurarVentaDeServicio()
+    {
         VentaServicio reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen(nombre,"rb");
-        if(pAux==NULL)
+        pAux = fopen(nombre, "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE UN BACKUP";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE UN BACKUP";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen("ventaDeServicio.dat","wb");
-        if(p==NULL){
+        p = fopen("ventaDeServicio.dat", "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(VentaServicio),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(VentaServicio), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(VentaServicio), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(VentaServicio), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"RESTAURACION DE ARCHIVO COMPLETA";
+        cout << "RESTAURACION DE ARCHIVO COMPLETA";
         return 1;
     }
 };
 
-///Separados-----------------------
+/// Separados-----------------------
 
-class ConfiguracionStock{
+class ConfiguracionStock
+{
 private:
     char nombre[30];
-public:
-    ConfiguracionStock(const char *n){strcpy(nombre,n);}
 
-    int backupStock(){
+public:
+    ConfiguracionStock(const char *n) { strcpy(nombre, n); }
+
+    int backupStock()
+    {
         Stock reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen("stockList.dat","rb");
-        if(pAux==NULL)
+        pAux = fopen("stockList.dat", "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE EL ARCHIVO DE DATOS";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen(nombre,"wb");
-        if(p==NULL){
+        p = fopen(nombre, "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(Stock),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(Stock), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(Stock), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(Stock), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"COPIA DE SEGURIDAD CREADA";
+        cout << "COPIA DE SEGURIDAD CREADA";
         return 1;
     }
 
-
-    int restaurarStock(){
+    int restaurarStock()
+    {
         Stock reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen(nombre,"rb");
-        if(pAux==NULL)
+        pAux = fopen(nombre, "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE UN BACKUP";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE UN BACKUP";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen("stockList.dat","wb");
-        if(p==NULL){
+        p = fopen("stockList.dat", "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(Stock),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(Stock), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(Stock), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(Stock), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"RESTAURACION DE ARCHIVO COMPLETA";
+        cout << "RESTAURACION DE ARCHIVO COMPLETA";
         return 1;
     }
 };
 
+/// Separados-----------------------
 
-///Separados-----------------------
-
-class ConfiguracionVentaKiosco{
+class ConfiguracionVentaKiosco
+{
 private:
     char nombre[30];
-public:
-    ConfiguracionVentaKiosco(const char *n){strcpy(nombre,n);}
 
-    int backupVentaKiosco(){
+public:
+    ConfiguracionVentaKiosco(const char *n) { strcpy(nombre, n); }
+
+    int backupVentaKiosco()
+    {
         Kiosco reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen("ventasKiosco.dat","rb");
-        if(pAux==NULL)
+        pAux = fopen("ventasKiosco.dat", "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE EL ARCHIVO DE DATOS";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen(nombre,"wb");
-        if(p==NULL){
+        p = fopen(nombre, "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(Kiosco),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(Kiosco), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(Kiosco), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(Kiosco), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"COPIA DE SEGURIDAD CREADA";
+        cout << "COPIA DE SEGURIDAD CREADA";
         return 1;
     }
 
-
-    int restaurarVentaKiosco(){
+    int restaurarVentaKiosco()
+    {
         Kiosco reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen(nombre,"rb");
-        if(pAux==NULL)
+        pAux = fopen(nombre, "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE UN BACKUP";
-            textColor(15, 0);
-            return 1;
-        ;
+        cout << "NO EXISTE UN BACKUP";
+        textColor(15, 0);
+        return 1;
 
-        p=fopen("ventasKiosco.dat","wb");
-        if(p==NULL){
+        p = fopen("ventasKiosco.dat", "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(Kiosco),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(Kiosco), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(Kiosco), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(Kiosco), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"RESTAURACION DE ARCHIVO COMPLETA";
+        cout << "RESTAURACION DE ARCHIVO COMPLETA";
         return 1;
     }
 };
 
+/// Separados-----------------------
 
-///Separados-----------------------
-
-class ConfiguracionClientes{
+class ConfiguracionClientes
+{
 private:
     char nombre[30];
-public:
-    ConfiguracionClientes(const char *n){strcpy(nombre,n);}
 
-    int backupClientes(){
+public:
+    ConfiguracionClientes(const char *n) { strcpy(nombre, n); }
+
+    int backupClientes()
+    {
         Cliente reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen("clientes.dat","rb");
-        if(pAux==NULL)
+        pAux = fopen("clientes.dat", "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE EL ARCHIVO DE DATOS";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE EL ARCHIVO DE DATOS";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen(nombre,"wb");
-        if(p==NULL){
+        p = fopen(nombre, "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(Cliente),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(Cliente), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(Cliente), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(Cliente), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"COPIA DE SEGURIDAD CREADA";
+        cout << "COPIA DE SEGURIDAD CREADA";
         return 1;
     }
 
-
-    int restaurarClientes(){
+    int restaurarClientes()
+    {
         Cliente reg;
         FILE *p;
         FILE *pAux;
-        int cont=0;
+        int cont = 0;
 
-        pAux=fopen(nombre,"rb");
-        if(pAux==NULL)
+        pAux = fopen(nombre, "rb");
+        if (pAux == NULL)
             textColor(12, 0);
-            cout<<"NO EXISTE UN BACKUP";
-            textColor(15, 0);
-            return 1;
+        cout << "NO EXISTE UN BACKUP";
+        textColor(15, 0);
+        return 1;
         ;
 
-        p=fopen("clientes.dat","wb");
-        if(p==NULL){
+        p = fopen("clientes.dat", "wb");
+        if (p == NULL)
+        {
             fclose(pAux);
             exit(1);
         }
-        while(fread(&reg,sizeof(Cliente),1,pAux)==1){
-                fseek(pAux,sizeof reg*cont,0);
-                fread(&reg, sizeof(Cliente), 1, pAux);
-                fseek(p,sizeof reg*cont,0);
-                fwrite(&reg, sizeof reg, 1, p);
-                cont++;
+        while (fread(&reg, sizeof(Cliente), 1, pAux) == 1)
+        {
+            fseek(pAux, sizeof reg * cont, 0);
+            fread(&reg, sizeof(Cliente), 1, pAux);
+            fseek(p, sizeof reg * cont, 0);
+            fwrite(&reg, sizeof reg, 1, p);
+            cont++;
         }
         fclose(p);
         fclose(pAux);
-        cout<<"RESTAURACION DE ARCHIVO COMPLETA";
+        cout << "RESTAURACION DE ARCHIVO COMPLETA";
         return 1;
     }
 };
-
-
-
 
 #endif // CONFIGURACION_H_INCLUDED
