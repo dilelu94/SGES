@@ -277,7 +277,6 @@ public:
         return -1;
     }
 
-
     int modificarRegistro(int numeroItem)
     {
         FILE *p;
@@ -339,6 +338,15 @@ public:
         fseek(p, sizeof(Stock) * pos, SEEK_SET);
         int escribio = fwrite(&stockX, sizeof(Stock), 1, p);
         fclose(p);
+        if (escribio == 1)
+        {
+            textColor(10, 0);
+            divisorSimple();
+            cout << "SE ELIMINO EL CLIENTE EXITOSAMENTE :)" << endl;
+            divisorSimple();
+            textColor(15, 0);
+            return escribio;
+        }
         return escribio;
     }
 
@@ -360,9 +368,8 @@ public:
         fseek(p, sizeof(Stock) * pos, SEEK_SET);
         fread(&stockX, sizeof(Stock), 1, p);
 
-
-        ///cambiamos el valor del registro
-        stockX.setCantidad(stockX.getCantidad()-cant);
+        /// cambiamos el valor del registro
+        stockX.setCantidad(stockX.getCantidad() - cant);
 
         fseek(p, sizeof(Stock) * pos, SEEK_SET);
         int escribio = fwrite(&stockX, sizeof(Stock), 1, p);
@@ -396,9 +403,8 @@ public:
         fseek(p, sizeof(Stock) * pos, SEEK_SET);
         fread(&stockX, sizeof(Stock), 1, p);
 
-
-        ///cambiamos el valor del registro
-        stockX.setCantidad(stockX.getCantidad()+cant);
+        /// cambiamos el valor del registro
+        stockX.setCantidad(stockX.getCantidad() + cant);
 
         fseek(p, sizeof(Stock) * pos, SEEK_SET);
         int escribio = fwrite(&stockX, sizeof(Stock), 1, p);

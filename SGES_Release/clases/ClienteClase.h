@@ -251,7 +251,15 @@ public:
                 fseek(p, sizeof x * contNumCliente, 0);
                 int escribio = fwrite(&x, sizeof x, 1, p);
                 fclose(p);
-                return escribio;
+                if (escribio == 1)
+                {
+                    textColor(10, 0);
+                    divisorSimple();
+                    cout << "SE ELIMINO EL CLIENTE EXITOSAMENTE :)" << endl;
+                    divisorSimple();
+                    textColor(15, 0);
+                    return escribio;
+                }
             }
             contNumCliente++;
         }

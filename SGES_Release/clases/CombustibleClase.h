@@ -19,14 +19,14 @@ public:
     void setTipoCombustible(int t) { _tipoCombustible = t; }
     void setPrecio(float p) { _precio = p; }
     void setCalidad(int c) { _calidad = c; }
-    void setCantidadLitros(float l){_litros=l;}
+    void setCantidadLitros(float l) { _litros = l; }
     void setEstado(bool e) { _estado = e; }
     // gets
     int getCodigoCombustible() { return _codigoCombustible; }
     int getTipoCombustible() { return _tipoCombustible; }
     float getPrecio() { return _precio; }
     int getCalidad() { return _calidad; }
-    float getLitros(){ return _litros;}
+    float getLitros() { return _litros; }
     bool getEstado() { return _estado; }
     // Metodos
     bool cargar()
@@ -354,9 +354,18 @@ public:
         fread(&combustibleX, sizeof(Combustible), 1, p);
         combustibleX.setEstado(false);
         fseek(p, sizeof(Combustible) * pos, SEEK_SET);
-        fwrite(&combustibleX, sizeof(Combustible), 1, p);
+        int escribio = fwrite(&combustibleX, sizeof(Combustible), 1, p);
         fclose(p);
-        return 1;
+        if (escribio == 1)
+        {
+            textColor(10, 0);
+            divisorSimple();
+            cout << "SE ELIMINO EL CLIENTE EXITOSAMENTE :)" << endl;
+            divisorSimple();
+            textColor(15, 0);
+            return escribio;
+        }
+        return escribio;
     }
 
     float devolverPrecio(int codCombustible)
@@ -417,9 +426,8 @@ public:
         fseek(p, sizeof(Combustible) * pos, SEEK_SET);
         fread(&CombustibleX, sizeof(Combustible), 1, p);
 
-
-        ///cambiamos el valor del registro
-        CombustibleX.setCantidadLitros(CombustibleX.getLitros()-cant);
+        /// cambiamos el valor del registro
+        CombustibleX.setCantidadLitros(CombustibleX.getLitros() - cant);
 
         fseek(p, sizeof(Combustible) * pos, SEEK_SET);
         int escribio = fwrite(&CombustibleX, sizeof(Combustible), 1, p);
@@ -453,9 +461,8 @@ public:
         fseek(p, sizeof(Combustible) * pos, SEEK_SET);
         fread(&CombustibleX, sizeof(Combustible), 1, p);
 
-
-        ///cambiamos el valor del registro
-        CombustibleX.setCantidadLitros(CombustibleX.getLitros()+cant);
+        /// cambiamos el valor del registro
+        CombustibleX.setCantidadLitros(CombustibleX.getLitros() + cant);
 
         fseek(p, sizeof(Combustible) * pos, SEEK_SET);
         int escribio = fwrite(&CombustibleX, sizeof(Combustible), 1, p);
@@ -470,7 +477,6 @@ public:
         }
         return escribio;
     }
-
 };
 
 #endif // COMBUSTIBLECLASE_H_INCLUDED

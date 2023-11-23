@@ -55,7 +55,7 @@ public:
             system("pause");
             return -1;
         }
-        cantidadStock=archivoStock.devolverCantidad(_codigoArt);
+        cantidadStock = archivoStock.devolverCantidad(_codigoArt);
         cout << "INGRESE CANTIDAD: " << endl;
         cin >> _cant;
         if (_cant <= 0)
@@ -67,7 +67,8 @@ public:
             textColor(15, 0);
             return -1;
         }
-        if(_cant>cantidadStock){
+        if (_cant > cantidadStock)
+        {
             textColor(12, 0);
             divisorSimpleLargo();
             cout << "ERROR: VUELVA A INTENTAR E INGRESE UNA CANTIDAD MENOR AL TOTAL PARA EL ARTICULO SELECCIONADO" << endl;
@@ -111,12 +112,13 @@ public:
             return -1;
         }
 
-         ArchivoCliente archivoCliente;
+        ArchivoCliente archivoCliente;
         Cliente clienteX;
         int validacion;
         cout << "INGRESE EL NUMERO DE CLIENTE: " << endl;
         cin >> _cliente;
-        if (archivoCliente.existeCliente(_cliente) == false){
+        if (archivoCliente.existeCliente(_cliente) == false)
+        {
             system("cls");
             textColor(12, 0);
             divisorSimpleLargo();
@@ -125,10 +127,15 @@ public:
             textColor(15, 0);
             cout << "DESEA CARGAR EL NUEVO CLIENTE(1:SI ; 2:NO) " << endl;
             cin >> validacion;
-            if(validacion==1){
+            if (validacion == 1)
+            {
                 clienteX.cargar();
                 archivoCliente.agregarRegistro(clienteX);
-            } else {return false;}
+            }
+            else
+            {
+                return false;
+            }
         }
 
         _total = _cant * precio;
@@ -335,7 +342,7 @@ public:
         float recaudacion = precioXArticulo * kioscoX.getCantidad();
         archivoEmpleado.decrementarTotalRecaudado(kioscoX.getEmpleado(), recaudacion);
 
-        ///borrar stock
+        /// borrar stock
         ArchivoStock.restablecerCantidad(kioscoX.getCodigoArt(), kioscoX.getCantidad());
 
         kioscoX.cargar();
@@ -345,8 +352,7 @@ public:
         recaudacion = precioXArticulo * kioscoX.getCantidad();
         archivoEmpleado.incrementarTotalRecaudado(kioscoX.getEmpleado(), recaudacion);
 
-
-        ///agregar nuevo stock
+        /// agregar nuevo stock
         ArchivoStock.actualizarCantidad(kioscoX.getCodigoArt(), kioscoX.getCantidad());
 
         fseek(p, sizeof(Kiosco) * pos, SEEK_SET);
@@ -383,6 +389,15 @@ public:
         fseek(p, sizeof(Kiosco) * pos, SEEK_SET);
         int escribio = fwrite(&kioscoX, sizeof(Kiosco), 1, p);
         fclose(p);
+        if (escribio == 1)
+        {
+            textColor(10, 0);
+            divisorSimple();
+            cout << "SE ELIMINO EL CLIENTE EXITOSAMENTE :)" << endl;
+            divisorSimple();
+            textColor(15, 0);
+            return escribio;
+        }
         return escribio;
     }
 
