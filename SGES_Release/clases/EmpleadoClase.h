@@ -470,19 +470,19 @@ public:
         promedioSueldos = promedioSueldos / cantidadDeEmpleados;
         // mostrar estadisticas y dibujar recuadro
         int x = 50, y = 1;
+        int base = 48, altura = 10;
         if (cantidadDeEmpleados == 0)
         {
             return false;
         }
         if (totalRecaudado > 999)
         {
-            x = 49;
+            base = 49;
         }
         if (totalRecaudado > 9999)
         {
-            x = 52;
+            base = 52;
         }
-        int base = 48, altura = 10;
         textColor(1, 0);
         dibujarRecuadro(base, altura, x - 2, 0); // x-2 para que halla un espacio entre pared y texto
         textColor(15, 0);
