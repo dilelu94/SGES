@@ -127,7 +127,7 @@ public:
         _estado = true;
         return true;
     }
-    
+
     void mostrar()
     {
         if (_estado == false)
@@ -336,12 +336,18 @@ public:
                 float recaudacionEliminar = precioXLitro * combustibleX.getCantidadCargada();
                 archivoEmpleado.decrementarTotalRecaudado(combustibleX.getEmpleado(), recaudacionEliminar);
 
+                /// Borrar el ingreso viejo de nafta
+                archivoCombustible.restablecerCantidad(combustibleX.getCodigoCombustible(), combustibleX.getCantidadCargada());
+
                 combustibleX.cargar();
 
                 /// Cargar el ingreso nuevo del empleado
                 precioXLitro = archivoCombustible.devolverPrecio(combustibleX.getCodigoCombustible());
                 float recaudacion = precioXLitro * combustibleX.getCantidadCargada();
                 archivoEmpleado.incrementarTotalRecaudado(combustibleX.getEmpleado(), recaudacion);
+
+                /// cargar nuevo ingreso de nafta
+                archivoCombustible.actualizarCantidad(combustibleX.getCodigoCombustible(), combustibleX.getCantidadCargada());
 
                 fseek(p, sizeof combustibleX * contCodComb, 0);
                 int escribio = fwrite(&combustibleX, sizeof combustibleX, 1, p);

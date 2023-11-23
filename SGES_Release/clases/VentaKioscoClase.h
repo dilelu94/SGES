@@ -312,12 +312,19 @@ public:
         float recaudacion = precioXArticulo * kioscoX.getCantidad();
         archivoEmpleado.decrementarTotalRecaudado(kioscoX.getEmpleado(), recaudacion);
 
+        ///borrar stock
+        ArchivoStock.restablecerCantidad(kioscoX.getCodigoArt(), kioscoX.getCantidad());
+
         kioscoX.cargar();
 
         /// agregar la nueva recaudacion de empleado
         precioXArticulo = ArchivoStock.devolverPrecio(kioscoX.getCodigoArt());
         recaudacion = precioXArticulo * kioscoX.getCantidad();
         archivoEmpleado.incrementarTotalRecaudado(kioscoX.getEmpleado(), recaudacion);
+
+
+        ///agregar nuevo stock
+        ArchivoStock.actualizarCantidad(kioscoX.getCodigoArt(), kioscoX.getCantidad());
 
         fseek(p, sizeof(Kiosco) * pos, SEEK_SET);
         int escribio = fwrite(&kioscoX, sizeof(Kiosco), 1, p);

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="SGES" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/SGES" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/SGES" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="clases/CargaCombustibleClase.h" />
+		<Unit filename="clases/ClienteClase.h" />
+		<Unit filename="clases/CombustibleClase.h" />
+		<Unit filename="clases/EmpleadoClase.h" />
+		<Unit filename="clases/StockListClase.h" />
+		<Unit filename="clases/TipoServicioClase.h" />
+		<Unit filename="clases/VentaKioscoClase.h" />
+		<Unit filename="clases/VentaServicioClase.h" />
+		<Unit filename="clases/configuracion.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="menues/menuCargaCombustible.h" />
+		<Unit filename="menues/menuClientes.h" />
+		<Unit filename="menues/menuCombustible.h" />
+		<Unit filename="menues/menuConfiguracion.h" />
+		<Unit filename="menues/menuEmpleados.h" />
+		<Unit filename="menues/menuStockList.h" />
+		<Unit filename="menues/menuTipoServicios.h" />
+		<Unit filename="menues/menuVentaKiosco.h" />
+		<Unit filename="menues/menuVentaServicios.h" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

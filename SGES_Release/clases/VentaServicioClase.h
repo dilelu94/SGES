@@ -88,7 +88,7 @@ public:
 class ArchivoVentaServicio
 {
 private:
-    char nombre[50] = "ventaDeServicio.dat";
+    char nombre[50] = "ventasDeServicio.dat";
 
 public:
     void setArchivoCombustible(const char *e)

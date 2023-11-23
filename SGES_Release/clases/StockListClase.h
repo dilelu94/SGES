@@ -376,10 +376,34 @@ public:
             textColor(15, 0);
         }
         return escribio;
+    }
+
+    int restablecerCantidad(int cod, int cant)
+    {
+        FILE *p;
+        int pos = buscarPosicion(cod);
+        Stock stockX;
+        if (pos == -1)
+        {
+            return -1;
+        }
+        p = fopen(nombre, "rb+");
+        if (p == NULL)
+        {
+            return -1;
+        }
+
+        fseek(p, sizeof(Stock) * pos, SEEK_SET);
+        fread(&stockX, sizeof(Stock), 1, p);
 
 
+        ///cambiamos el valor del registro
+        stockX.setCantidad(stockX.getCantidad()+cant);
 
-
+        fseek(p, sizeof(Stock) * pos, SEEK_SET);
+        int escribio = fwrite(&stockX, sizeof(Stock), 1, p);
+        fclose(p);
+        return escribio;
     }
 };
 

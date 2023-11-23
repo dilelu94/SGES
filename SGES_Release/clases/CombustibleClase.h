@@ -435,6 +435,42 @@ public:
         return escribio;
     }
 
+    int restablecerCantidad(int cod, float cant)
+    {
+        FILE *p;
+        int pos = buscarPosicion(cod);
+        Combustible CombustibleX;
+        if (pos == -1)
+        {
+            return -1;
+        }
+        p = fopen(nombre, "rb+");
+        if (p == NULL)
+        {
+            return -1;
+        }
+
+        fseek(p, sizeof(Combustible) * pos, SEEK_SET);
+        fread(&CombustibleX, sizeof(Combustible), 1, p);
+
+
+        ///cambiamos el valor del registro
+        CombustibleX.setCantidadLitros(CombustibleX.getLitros()+cant);
+
+        fseek(p, sizeof(Combustible) * pos, SEEK_SET);
+        int escribio = fwrite(&CombustibleX, sizeof(Combustible), 1, p);
+        fclose(p);
+        if (escribio == 1)
+        {
+            textColor(10, 0);
+            divisorSimple();
+            cout << "SE MODIFICO EL REGISTRO EXITOSAMENTE :)" << endl;
+            divisorSimple();
+            textColor(15, 0);
+        }
+        return escribio;
+    }
+
 };
 
 #endif // COMBUSTIBLECLASE_H_INCLUDED
